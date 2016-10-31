@@ -1,0 +1,10 @@
+/.idea
+/venv
+venv/
+*.pyc
+/migrations
+
+# Config files
+/config/__init__.py
+/config/linkshortener.ini
+/config/linkshortener.ngnix.conf

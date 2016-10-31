@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+
+    {% if current_user.is_authenticated %}
+        <div class="logout-button-wrapper">
+            <!-- <a href="/logout" class="button-link">Logout</a> -->
+            <button onclick="window.location.href='/logout'">Log out</button>
+        </div>
+
+        <div class="main-content">
+
+            <div class="shorten-link-form">
+                <form action="{{ url_for('add_link') }}" method="post">
+                    <input type="text" name="link" size="50">
+                    <input type="checkbox" name="private" id="link-private-radio" value="False">
+                    <label for="link-private-radio">private</label>
+                    <button type="submit">Shorten</button>
+                </form>
+            </div>
+
+            <div class="link-table-container">
+                {% if data is not none %}
+                    <table class="link-table">
+                        <thead>
+                            <tr>
+                                <td>Long link</td>
+                                <td>Created</td>
+                                <td>Private</td>
+                                <td>Short link</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           {% for row in data %}
+                                <tr id="{{ row['link_token'] }}">
+                                    <td><a href="{{ row['link_url'] }}">{{ row['link_name'] }}</a></td>
+                                    <td>{{ row['created'] }}</td>
+                                    <td>{{ row['private'] }}</td>
+                                    <td class="link-token"><a>{{ row['link_token'] }}</a></td>
+                                    <td>
+                                        <button class="copy-button">Copy</button>
+                                    </td>
+                                    <td>
+                                        <form action="{{ url_for('delete_link') }}" method="post">
+                                            <input type=hidden value="{{ row['link_token'] }}" name="link_token">
+                                            <button type="submit">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>No links to display.</p>
+                {% endif %}
+            </div>
+        </div>
+
+    {% else %}
+        <div class="login-button-wrapper">
+            <button onclick="window.location.href='/login'">Log in</button>
+        </div>
+    {% endif %}
+
+{% endblock %}
