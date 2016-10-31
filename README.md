@@ -15,6 +15,8 @@ prevents users that are not logged into the application from viewing them.
 
 ## Deployment
 
+Use ``pip install -r requirements.txt`` to install the required dependencies.
+
 Before use create a valid configuration file using the instructions provided by the example file in ``config/``.
 Specifically, provide a secret key and a valid URI to an SQL database. During development you can run the application 
 using ``run.py`` directly, but for production deployment I recommend using a service such as 
