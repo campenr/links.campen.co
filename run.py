@@ -10,7 +10,6 @@
 For complete documentation see README.md.
 """
 
-#!flask/bin/python
 from LinkShortener import app
 
 if __name__ == '__main__':
