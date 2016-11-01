@@ -111,7 +111,7 @@ class Link(db.Model):
     __tablename__ = 'links'
     id = db.Column(db.Integer, primary_key=True)
     link_name = db.Column(db.String(240))
-    link_url = db.Column(db.String(240))
+    link_url = db.Column(db.Text)
     link_token = db.Column(db.String(32))
     created = db.Column(db.DateTime)
     private = db.Column(db.Boolean)
