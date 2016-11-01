@@ -132,6 +132,3 @@ def delete_link():
 
     return redirect(url_for('index'))
 
-# TODO create filter for displaying created data
-
-# TODO add button to copy short link to the clipboard

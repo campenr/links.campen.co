@@ -225,3 +225,34 @@ class Link(db.Model):
             link = link[:40] + ' ...'
 
         return link
+
+    @staticmethod
+    def format_date(created):
+        """Custom jinja filter for formatting when a short link was created."""
+
+        month_dict = {1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct',
+                      11: 'Nov', 12: 'Dec'}
+
+        seconds_ = (datetime.datetime.now() - created).total_seconds()
+        now_ = datetime.datetime.now()
+
+        if seconds_ < 60:
+            return '%i seconds ago' % seconds_
+
+        elif seconds_ < 3600:
+            return '%i minutes ago' % (seconds_/60)
+
+        elif (created.day == now_.day) and \
+             (created.month == now_.month) and \
+             (created.year == now_.year):
+            return '%i hours ago' % (seconds_/3600)
+
+        elif (created.day == (now_ - datetime.timedelta(days=1)).day) and \
+             (seconds_ < 172800):
+            return 'Yesterday'
+
+        elif now_.year == created.year:
+            return '%s %s' % (month_dict[created.month], created.day)
+
+        else:
+            return '%s %s, %s' % (month_dict[created.month], created.day, created.year)

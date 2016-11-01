@@ -33,7 +33,7 @@
                            {% for row in data %}
                                 <tr id="{{ row['link_token'] }}">
                                     <td><a href="{{ row['link_url'] }}">{{ row['link_name'] }}</a></td>
-                                    <td>{{ row['created'] }}</td>
+                                    <td>{{ row['created'] | date_filter }}</td>
                                     <td>{{ row['private'] }}</td>
                                     <td class="link-token"><a>{{ row['link_token'] }}</a></td>
                                     <td>
