@@ -1,4 +1,4 @@
-# LinkShortener 1.0.0
+# LinkShortener 0.2.0
 
 ## Description
 
