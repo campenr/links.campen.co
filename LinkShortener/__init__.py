@@ -5,7 +5,7 @@
 
 """Simple Flask application for creating/managing shortened URLs.
 
-# LinkShortener 0.2.0
+# LinkShortener 0.2.1
 
 For complete documentation see README.md.
 """

@@ -1,8 +1,10 @@
-/.idea
-/venv
+# Directories
+.idea
 venv/
+*/migrations/
+
+# Files
 *.pyc
-/migrations
 
 # Config files
 /config/__init__.py
