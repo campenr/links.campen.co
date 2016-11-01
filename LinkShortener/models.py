@@ -190,6 +190,7 @@ class Link(db.Model):
         return link_data
 
     @staticmethod
+    # TODO change this to a jinja filter?
     def format_link_url(url):
         """Format submitted long link URL."""
 
@@ -211,6 +212,7 @@ class Link(db.Model):
                 return link_token
 
     @staticmethod
+    # TODO change this to a jinja filter?
     def format_link_name(link):
         """Format the name of the long link for cleaner output."""
 
@@ -221,8 +223,10 @@ class Link(db.Model):
         for key, value in common_names.items():
             if key in link:
                 link = value
-        if len(link) > 40:
-            link = link[:40] + ' ...'
+
+        # TODO dont truncate stored name, let the client decide how to truncate names instead.
+        if len(link) > 35:
+            link = link[:35] + ' ...'
 
         return link
 

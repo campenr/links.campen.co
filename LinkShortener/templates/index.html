@@ -21,7 +21,15 @@
             <div class="link-table-container">
                 {% if data is not none %}
                     <table class="link-table">
-                        <thead>
+                        <colgroup>
+                            <col class="col-1">
+                            <col class="col-2">
+                            <col class="col-3">
+                            <col class="col-4">
+                            <col class="col-5">
+                            <col class="col-6">
+                        </colgroup>
+                        <thead class="link-table-head">
                             <tr>
                                 <td>Long link</td>
                                 <td>Created</td>
@@ -29,7 +37,7 @@
                                 <td>Short link</td>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="link-table-body">
                            {% for row in data %}
                                 <tr id="{{ row['link_token'] }}">
                                     <td><a href="{{ row['link_url'] }}">{{ row['link_name'] }}</a></td>
