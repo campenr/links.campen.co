@@ -4,7 +4,7 @@
 # See LICENSE.txt for the full license documentation
 
 """
-LinkShortener v0.3.0
+LinkShortener v0.3.1
 
 A Flask app for creating/managing short links for longer length URLs.
 """
