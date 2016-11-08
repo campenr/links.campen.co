@@ -8,7 +8,6 @@
         </div>
 
         <div class="main-content">
-
             <div class="shorten-link-form">
                 <form action="{{ url_for('add_link') }}" method="post">
                     <input type="text" name="link" size="50">
@@ -27,13 +26,11 @@
                             <col class="col-3">
                             <col class="col-4">
                             <col class="col-5">
-                            <col class="col-6">
                         </colgroup>
                         <thead class="link-table-head">
                             <tr>
                                 <td>Long link</td>
                                 <td>Created</td>
-                                <td>Private</td>
                                 <td>Short link</td>
                             </tr>
                         </thead>
@@ -42,15 +39,23 @@
                                 <tr id="{{ row['link_token'] }}">
                                     <td><a href="{{ row['link_url'] }}">{{ row['link_name'] }}</a></td>
                                     <td>{{ row['created'] | date_filter }}</td>
-                                    <td>{{ row['private'] }}</td>
-                                    <td class="link-token"><a>{{ row['link_token'] }}</a></td>
+                                    <td class="link-token">
+                                        <a>{{ row['link_token'] }}</a>
+                                        {% if row['private'] == true %}
+                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </td>
                                     <td>
-                                        <button class="copy-button">Copy</button>
+                                        <button class="copy-button">
+                                            <i class="fa fa-clipboard" aria-hidden="true" title="copy to clipboard"></i>
+                                        </button>
                                     </td>
                                     <td>
                                         <form action="{{ url_for('delete_link') }}" method="post">
                                             <input type=hidden value="{{ row['link_token'] }}" name="link_token">
-                                            <button type="submit">Delete</button>
+                                            <button type="submit" class="delete-button">
+                                                <i class="fa fa-trash-o" aria-hidden="true" title="delete"></i>
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>

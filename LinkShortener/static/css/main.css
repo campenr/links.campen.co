@@ -80,11 +80,13 @@ h1 {
 }
 
 /*div*/.link-table-container {
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 20px;
+    padding-bottom: 70px;
 }
 
 /*table*/.link-table {
+    padding-top: 10px;
+    padding-bottom: 10px;
     table-layout: fixed;
     border-collapse: collapse;
     width: 75%;
@@ -92,7 +94,6 @@ h1 {
 
 /*table*/.link-table th, /*table*/.link-table td {
     padding: 5px 15px 5px 15px;
-    text-align: center;
 }
 
 /*table.link-table*/.link-table-head {
@@ -100,27 +101,35 @@ h1 {
 }
 
 /*table.link-table*/.col-1 {
-    width: 32.5%;
+    width: 45%;
 }
 
 /*table.link-table*/.col-2 {
-    width: 15%;
+    width: 17%;
 }
 
 /*table.link-table*/.col-3 {
-    width: 12.5%;
+    width: 30%;
 }
 
 /*table.link-table*/.col-4 {
-    width: 25%;
+    width: 4%;
 }
 
 /*table.link-table*/.col-5 {
-    width: 7.5%;
+    width: 4%;
 }
 
-/*table.link-table*/.col-6 {
-    width: 7.5%;
+/*button*/.copy-button, /*button*/.delete-button {
+    opacity: 0;
+}
+
+tr:hover {
+    background: #eee;
+}
+
+tr:hover /*button*/.copy-button, tr:hover /*button*/.delete-button{
+    opacity: 1;
 }
 
 button {
@@ -130,14 +139,19 @@ button {
     padding-bottom: 2px;
 }
 
-
 /*footer*/.footer {
     position: relative;
-	margin-top: -30px; /* negative value of footer height */
-	height: 30px;
+	margin-top: -45px; /* negative value of footer height including padding*/
+	height: 45px;
 	clear: both;
 }
 
 /*div*/.footer-content {
-    padding-top: 5px;
+    font-size: 0.85em;
+    padding-bottom: 5px;
+}
+
+/*p*/.version {
+    font-size: 0.75em;
+    padding: 5px;
 }
