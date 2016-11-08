@@ -3,11 +3,10 @@
 # This software is released under the Modified BSD license
 # See LICENSE.txt for the full license documentation
 
-"""Simple Flask application for creating/managing shortened URLs.
+"""
+LinkShortener v0.3.0
 
-# LinkShortener 0.2.1
-
-For complete documentation see README.md.
+A Flask app for creating/managing short links for longer length URLs.
 """
 
 from flask import Flask
