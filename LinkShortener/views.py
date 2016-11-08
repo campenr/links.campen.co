@@ -69,7 +69,7 @@ def view_link(link_token):
         abort(404)
     else:
         if link_data['private']:
-            return redirect(url_for('/link/private/' + link_token))
+            return redirect('/link/private/' + link_token)
         else:
             return redirect(link_data['link_url'], code=307)
 
