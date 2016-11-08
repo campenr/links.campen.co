@@ -124,7 +124,7 @@ h1 {
     opacity: 0;
 }
 
-tr:hover {
+/*table.link-table*/.link-table-body tr:hover {
     background: #eee;
 }
 
