@@ -1,35 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <div class="login-heading-wrapper">
+    <div class="signin-wrapper">
+
         <h2 class="login-heading">Log in</h2>
-    </div>
 
-    <div class="login-form-wrapper">
+        <form action="" method="post" name="login">
+            {{ form.hidden_tag() }}
 
-        <div class="login-form">
-            <form action="" method="post" name="login">
-                {{ form.hidden_tag() }}
+            <label for="username" class="sr-only">Username</label>
+            {{ form.username(class="form-control", placeholder="Username") }}
 
-                <table>
-                    <tbody>
-                        <tr>
-                            <td><label for="username">username</label></td>
-                            <td>{{ form.username }}</td>
-                        </tr>
-                        <tr>
-                            <td><label for="password">password</label></td>
-                            <td>{{ form.password }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <label for="password" class="sr-only">Password</label>
+            {{ form.password(class="form-control", placeholder="Password") }}
 
-                <div class="login-button-wrapper">
-                    <button type="submit">Log in</button>
-                </div>
+            <br/>
 
-            </form>
-        </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+        </form>
+
+        <br/>
+
+        <button class="btn btn-default btn-block">
+            <a href="{{ url_for('google_login') }}">
+                <img src="static/img/btn_google_signin_light_normal_web.png">
+            </a>
+        </button>
 
     </div>
+
 {% endblock %}

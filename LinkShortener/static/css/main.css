@@ -1,53 +1,14 @@
-html {
-    font-family:sans-serif;
-}
-
-*{
-    margin: 0 auto;
-	padding: 0;
-}
-
-html, body {
-    height: 100%;
-}
-
 body {
     text-align: center;
-    background: #fafafa;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #eee;
 }
 
-h1 {
-    font-family: Georgia, serif;
-    font-size: 2.1em;
-    letter-spacing: 0.05em;
-}
-
-/*h2*/.login-heading {
-    font-family: Arial, sans-serif;
-    font-size: 1.5em;
-}
-
-/*div*/.main-wrapper {
-    min-height: 100%;
-}
-
-/*nav*/.nav {
-    height: 50px;
-    padding-top: 15px;
-}
-
-/*div*/.main-content-wrapper {
-    overflow: auto;
-	padding-bottom: 30px;
-}
-
-/*div*/.main-content {
-
-}
-
-/*div*/.login-button-wrapper, /*div*/.logout-button-wrapper {
-    padding-top: 10px;
-    padding-bottom: 10px;
+/*div*/.signin-wrapper {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
 }
 
 /*a*/.button-link {
@@ -67,16 +28,6 @@ h1 {
 /*a*/.link:hover {
 	text-decoration: none;
 	color: #000000;
-}
-
-/*div*/.login-heading-wrapper {
-    padding-top: 30px;
-    padding-bottom: 15px;
-}
-
-/*div*/.shorten-link-form {
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 
 /*div*/.link-table-container {
@@ -130,28 +81,4 @@ h1 {
 
 tr:hover /*button*/.copy-button, tr:hover /*button*/.delete-button{
     opacity: 1;
-}
-
-button {
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-}
-
-/*footer*/.footer {
-    position: relative;
-	margin-top: -45px; /* negative value of footer height including padding*/
-	height: 45px;
-	clear: both;
-}
-
-/*div*/.footer-content {
-    font-size: 0.85em;
-    padding-bottom: 5px;
-}
-
-/*p*/.version {
-    font-size: 0.75em;
-    padding: 5px;
 }

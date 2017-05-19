@@ -3,11 +3,11 @@
 # This software is released under the Modified BSD license
 # See LICENSE.txt for the full license documentation
 
-from flask import redirect, render_template, abort, request, url_for
+from flask import redirect, render_template, abort, request, url_for, session, jsonify
 from flask_login import login_user, logout_user, current_user
 from flask_login import login_required
 
-from LinkShortener import app
+from LinkShortener import app, google
 from LinkShortener.forms import LoginForm
 from LinkShortener.models import User, Link
 
@@ -49,6 +49,41 @@ def login():
         # TODO handle incorrect password better, perhaps during form validation.
 
     return render_template('login.html', title='Log In', form=form)
+
+@app.route('/login/google', methods=['GET', 'POST'])
+def google_login():
+    """Route for logging in user with Google OAuth2"""
+
+    return google.authorize(callback=url_for('authorized', _external=True))
+
+@app.route('/login/authorized')
+def authorized():
+    resp = google.authorized_response()
+    if resp is None:
+        return 'Access denied: reason=%s error=%s' % (
+            request.args['error_reason'],
+            request.args['error_description']
+        )
+    session['google_token'] = (resp['access_token'], '')
+    me = google.get('userinfo')
+
+    print(me.raw_data)
+    print(session)
+
+    # username is the users email if logging in with google oauth2
+    user = User.query.filter_by(email=me.data['email']).limit(1).first()
+    if user is None:
+        user = User.add_user(email=me.data['email'])
+
+    login_user(user)
+    _next = request.args.get('next')
+    return redirect(_next or '/')
+
+
+
+@google.tokengetter
+def get_google_oauth_token():
+    return session.get('google_token')
 
 
 @app.route('/logout')

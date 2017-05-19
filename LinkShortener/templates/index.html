@@ -4,7 +4,7 @@
     {% if current_user.is_authenticated %}
         <div class="logout-button-wrapper">
             <!-- <a href="/logout" class="button-link">Logout</a> -->
-            <button onclick="window.location.href='/logout'">Log out</button>
+            <button class="btn btn-default" onclick="window.location.href='/logout'">Log out</button>
         </div>
 
         <div class="main-content">
@@ -13,7 +13,7 @@
                     <input type="text" name="link" size="50">
                     <input type="checkbox" name="private" id="link-private-radio" value="False">
                     <label for="link-private-radio">private</label>
-                    <button type="submit">Shorten</button>
+                    <button class="btn btn-default" type="submit">Shorten</button>
                 </form>
             </div>
 

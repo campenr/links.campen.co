@@ -30,6 +30,7 @@ class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(32), index=True, unique=True)
+    email = db.Column(db.String(32), index=True, unique=True)
     password_hash = db.Column(db.String(120))
     links = db.relationship('Link', backref='owner', lazy='dynamic')
 
@@ -49,18 +50,20 @@ class User(db.Model):
         return str(self.id)
 
     @classmethod
-    def add_user(cls, username, password, api=False):
+    def add_user(cls, username=None, email=None, password=None, api=False):
         """Add a new user to the User table and return the id of the user, else None."""
 
         user = User()
 
         user.username = username
-        user.password_hash = cls.hash_password(password)
+        user.email = email
+        if password is not None:
+            user.password_hash = cls.hash_password(password)
 
         db.session.add(user)
         db.session.commit()
 
-        return user.get_id()
+        return user
 
     @classmethod
     def delete_user(cls, username):
@@ -77,13 +80,15 @@ class User(db.Model):
         """Return hash of submitted password."""
         return pwd_context.encrypt(password)
 
-
     def verify_password(self, password):
         """Return whether submitted password matches stored hash."""
         return pwd_context.verify(password, self.password_hash)
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        if self.username is not None:
+            return '<User %r>' % self.username
+        if self.email is not None:
+            return '<User %r>' % self.email
 
 
 class Link(db.Model):
