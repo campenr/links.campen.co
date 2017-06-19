@@ -72,7 +72,7 @@ body {
 }
 
 /*button*/.copy-button, /*button*/.delete-button {
-    opacity: 0;
+ /*   opacity: 0;*/
 }
 
 /*table.link-table*/.link-table-body tr:hover {
@@ -80,5 +80,5 @@ body {
 }
 
 tr:hover /*button*/.copy-button, tr:hover /*button*/.delete-button{
-    opacity: 1;
+/*    opacity: 1; */
 }

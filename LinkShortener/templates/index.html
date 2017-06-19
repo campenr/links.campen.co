@@ -7,19 +7,26 @@
             <button class="btn btn-default" onclick="window.location.href='/logout'">Log out</button>
         </div>
 
-        <div class="main-content">
+        <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
             <div class="shorten-link-form">
                 <form action="{{ url_for('add_link') }}" method="post">
-                    <input type="text" name="link" size="50">
-                    <input type="checkbox" name="private" id="link-private-radio" value="False">
-                    <label for="link-private-radio">private</label>
+                    <input class="form-control" type="text" name="link">
+                    <div class="form-group">
+                        <input type="checkbox" name="private" id="link-private-radio" value="False">
+                        <label for="link-private-radio">private</label>
+                    </div>
                     <button class="btn btn-default" type="submit">Shorten</button>
                 </form>
             </div>
 
+            <br/>
+
             <div class="link-table-container">
                 {% if data is not none %}
-                    <table class="link-table">
+                <div class="table-responsive">
+                    <table class="table">
                         <colgroup>
                             <col class="col-1">
                             <col class="col-2">
@@ -27,14 +34,14 @@
                             <col class="col-4">
                             <col class="col-5">
                         </colgroup>
-                        <thead class="link-table-head">
+                        <thead>
                             <tr>
-                                <td>Long link</td>
-                                <td>Created</td>
-                                <td>Short link</td>
+                                <th>Long link</th>
+                                <th>Created</th>
+                                <th>Short link</th>
                             </tr>
                         </thead>
-                        <tbody class="link-table-body">
+                        <tbody>
                            {% for row in data %}
                                 <tr id="{{ row['link_token'] }}">
                                     <td><a href="{{ row['link_url'] }}">{{ row['link_name'] }}</a></td>
@@ -62,10 +69,12 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                </div>
                 {% else %}
                     <p>No links to display.</p>
                 {% endif %}
             </div>
+        </div>
         </div>
 
     {% else %}
