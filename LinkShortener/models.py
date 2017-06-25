@@ -156,7 +156,7 @@ class Link(db.Model):
             return None
 
     @classmethod
-    def add_link(cls, submitted_link, user, private):
+    def add_link(cls, submitted_link, user):#, private):
         """Add a new link to the database and return the link object, else None."""
 
         link = cls()
@@ -166,7 +166,7 @@ class Link(db.Model):
         link.link_token = cls.make_link_token()
 
         link.owner = user
-        link.private = private
+        # link.private = private
         link.created = datetime.datetime.now()
 
         db.session.add(link)

@@ -19,4 +19,8 @@ $(document).ready(function(){
 
     });    // Close iterate over table rows
 
+    $(".btn").mouseup(function(){
+        $(this).blur();
+    });
+
 });    // Close document.ready

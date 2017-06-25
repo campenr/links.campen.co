@@ -1,0 +1,84 @@
+body {
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #eee;
+}
+
+/*div*/.signin-wrapper {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+/*a*/.button-link {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: initial;
+}
+
+/*a*/.link {
+	text-decoration: none;
+	color: #000000;
+}
+
+/*a*/.link:hover {
+	text-decoration: none;
+	color: #000000;
+}
+
+/*div*/.link-table-container {
+    padding-top: 20px;
+    padding-bottom: 70px;
+}
+
+/*table*/.link-table {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 75%;
+}
+
+/*table*/.link-table th, /*table*/.link-table td {
+    padding: 5px 15px 5px 15px;
+}
+
+/*table.link-table*/.link-table-head {
+    font-weight: bold;
+}
+
+/*table.link-table*/.col-1 {
+    width: 45%;
+}
+
+/*table.link-table*/.col-2 {
+    width: 17%;
+}
+
+/*table.link-table*/.col-3 {
+    width: 30%;
+}
+
+/*table.link-table*/.col-4 {
+    width: 4%;
+}
+
+/*table.link-table*/.col-5 {
+    width: 4%;
+}
+
+/*button*/.copy-button, /*button*/.delete-button {
+ /*   opacity: 0;*/
+}
+
+/*table.link-table*/.link-table-body tr:hover {
+    background: #eee;
+}
+
+tr:hover /*button*/.copy-button, tr:hover /*button*/.delete-button{
+/*    opacity: 1; */
+}

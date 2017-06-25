@@ -8,10 +8,11 @@ from flask_login import login_user, logout_user, current_user
 from flask_login import login_required
 
 from LinkShortener import app, google
-from LinkShortener.forms import LoginForm
+from LinkShortener.forms import LoginForm, LinkForm
 from LinkShortener.models import User, Link
 
 # TODO implement flash messages
+
 
 @app.login_manager.user_loader
 def load_user(user_id):
@@ -21,14 +22,25 @@ def load_user(user_id):
 # TODO implement better logging of activity
 
 
-@app.route('/', methods=['GET'])
-@app.route('/index', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def index():
     """Route for displaying index page."""
 
     if current_user.is_authenticated:
+
+        link_form = LinkForm()
+        if request.method == 'POST' and link_form.validate_on_submit():
+
+            try:
+                Link.add_link(submitted_link=link_form.link.data, user=current_user)
+                return redirect(url_for('index'))
+            except Exception as e:
+                # TODO add flash message about failed attempt to add a link? Or send response JSON?
+                print(e)
+
         links_data = Link.retrieve_links(owner=current_user)
-        return render_template('index.html', data=links_data)
+        return render_template('index.html', data=links_data, link_form=link_form)
 
     return render_template('index.html')
 
@@ -50,11 +62,13 @@ def login():
 
     return render_template('login.html', title='Log In', form=form)
 
+
 @app.route('/login/google', methods=['GET', 'POST'])
 def google_login():
     """Route for logging in user with Google OAuth2"""
 
     return google.authorize(callback=url_for('authorized', _external=True))
+
 
 @app.route('/login/authorized')
 def authorized():
@@ -67,9 +81,6 @@ def authorized():
     session['google_token'] = (resp['access_token'], '')
     me = google.get('userinfo')
 
-    print(me.raw_data)
-    print(session)
-
     # username is the users email if logging in with google oauth2
     user = User.query.filter_by(email=me.data['email']).limit(1).first()
     if user is None:
@@ -78,7 +89,6 @@ def authorized():
     login_user(user)
     _next = request.args.get('next')
     return redirect(_next or '/')
-
 
 
 @google.tokengetter
@@ -109,42 +119,45 @@ def view_link(link_token):
             return redirect(link_data['link_url'], code=307)
 
 
-@app.route('/link/private/<link_token>', methods=['GET'])
-@login_required
-def view_private_link(link_token):
-    """Route for viewing a private link.
-
-    If a request is made for a private link, the request is redirected to this route that requires
-    that the client by logged in in order to view the link.
-    """
-
-    # TODO refactor to remove redundancy between this route and the view_link route.
-
-    link_data = Link.retrieve_link(link_token=link_token)
-    if link_data is None:
-        abort(404)
-    else:
-        # Prevent caching of redirect with 307 status code
-        return redirect(link_data['link_url'], code=307)
-
-
-@app.route('/link/add', methods=['POST'])
-@login_required
-def add_link():
-    """Add supplied link to the database."""
-
-    private = False
-
-    try:
-        request_data = request.form.to_dict()
-        submitted_link = request_data['link']
-        if 'private' in request_data.keys():
-            private = True
-        link_data = Link.add_link(submitted_link=submitted_link, user=current_user, private=private)
-    except Exception as e:
-        print(e)
-
-    return redirect(url_for('index'))
+# @app.route('/link/private/<link_token>', methods=['GET'])
+# @login_required
+# def view_private_link(link_token):
+#     """Route for viewing a private link.
+#
+#     If a request is made for a private link, the request is redirected to this route that requires
+#     that the client by logged in in order to view the link.
+#     """
+#
+#     # TODO refactor to remove redundancy between this route and the view_link route.
+#
+#     link_data = Link.retrieve_link(link_token=link_token)
+#     if link_data is None:
+#         abort(404)
+#     else:
+#         # Prevent caching of redirect with 307 status code
+#         return redirect(link_data['link_url'], code=307)
+#
+#
+# @app.route('/link/add', methods=['POST'])
+# @login_required
+# def add_link():
+#     """Add supplied link to the database."""
+#
+#     private = False
+#
+#     try:
+#         request_data = request.form.to_dict()
+#
+#         print('request data: ', request_data)
+#
+#         submitted_link = request_data['link']
+#         if 'private' in request_data.keys():
+#             private = True
+#         link_data = Link.add_link(submitted_link=submitted_link, user=current_user, private=private)
+#     except Exception as e:
+#         print(e)
+#
+#     return redirect(url_for('index'))
 
 
 @app.route('/link/delete', methods=['POST'])
