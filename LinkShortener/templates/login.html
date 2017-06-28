@@ -1,32 +1,41 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <div class="">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
 
-        <h2 class="login-heading">Log in</h2>
+            <div class="login-wrapper">
 
-        <form action="" method="post" name="login">
-            {{ form.hidden_tag() }}
+                <h2 class="login-heading">Log in</h2>
 
-            <label for="username" class="sr-only">Username</label>
-            {{ form.username(class="form-control", placeholder="Username") }}
+                <br/>
 
-            <label for="password" class="sr-only">Password</label>
-            {{ form.password(class="form-control", placeholder="Password") }}
+                <form action="" method="post" name="login">
+                    {{ form.hidden_tag() }}
 
-            <br/>
+                    <label for="username" class="sr-only">Username</label>
+                    {{ form.username(class="form-control", placeholder="Username") }}
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                    <label for="password" class="sr-only">Password</label>
+                    {{ form.password(class="form-control", placeholder="Password") }}
 
-        </form>
+                    <br/>
 
-        <br/>
+                    <button class="btn btn-primary btn-block" type="submit"><b>Sign in</b></button>
 
-        <button class="btn btn-default btn-block">
-            <a href="{{ url_for('google_login') }}">
-                <img src="static/img/btn_google_signin_light_normal_web.png">
-            </a>
-        </button>
+                </form>
+
+                <br/>
+
+                <a href="{{ url_for('google_login') }}" class="btn btn-default btn-block google-login-button">
+                    <span class="google-logo">
+                            <img src="static/img/logo_google.png" width="18px" height="18px">
+                        </span>
+                    <span class="google-login-text"><b>Sign in with Google</b></span>
+                </a>
+
+            </div>
+        </div>
 
     </div>
 

@@ -1,3 +1,23 @@
+/*div*/.login-wrapper {
+    text-align: center;
+    display: table;
+    margin: 0 auto;
+}
+
+/*button*/.google-login-button {
+}
+
+/*span*/.google-logo {
+    padding-left: 8px;
+    padding-right: 24px;
+}
+
+/*span*/.google-login-text {
+    padding-right: 24px;
+    color: #000;
+    color: rgba(0, 0, 0, 0.54);
+}
+
 /*table*/.col-1 {
     width: 45%;
 }
@@ -16,4 +36,9 @@
 
 /*table*/.col-5 {
     width: 4%;
+}
+
+.table > tbody > tr > td {
+    text-align: center !important;
+    vertical-align: middle !important;
 }

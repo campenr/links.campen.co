@@ -20,7 +20,7 @@
         </div>
         <br/>
 
-        <div class="link-table-container text-center">
+        <div class="link-table-container">
             {% if data is not none %}
             <!--<div class="table-responsive">-->
                 <table class="table table-striped table-hover">
@@ -41,7 +41,7 @@
                             <th>{# blank filler #}</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="link-table-body">
                        {% for row in data %}
                             <tr id="{{ row['link_token'] }}">
                                 <td><a href="{{ row['link_url'] }}">{{ row['link_name'] }}</a></td>
@@ -53,7 +53,7 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    <button class="btn btn-default" title="copy to clipboard">
+                                    <button class="btn btn-default copy-button" title="copy to clipboard">
                                         <i class="fa fa-fw fa-clipboard" aria-hidden="true"></i>
                                     </button>
                                 </td>
@@ -71,7 +71,7 @@
                 </table>
             <!--</div>-->
             {% else %}
-                <p>No links to display.</p>
+                <p>You don't have any links to display.</p>
             {% endif %}
         </div>
 
