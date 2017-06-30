@@ -13,27 +13,43 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.13/clipboard.min.js"></script>
         <script src="static/js/main.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
     </head>
 
     <body>
-        <div class="container">
-
-            <nav class="nav">
-                <div class="nav-content">
-                    <p><a href="/" class="link "><h1>Link Shortener</h1></a></p>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header pull-left">
+                    <a class="navbar-brand" href="{{ url_for('index') }}">Link Shortener</a>
                 </div>
-            </nav>
-
-                {% block content %}
-                    {% if error %}
-                        <p class=error><strong>Error:</strong> {{ error }}
+                <div class="navbar-header pull-right">
+                    {# don't want to show sign in button on sign in page #}
+                    {% if request.endpoint != 'login' %}
+                        {% if current_user.is_authenticated %}
+                            <p class="navbar-btn" style="padding-right: 10px;">
+                                <a type="button" class="btn btn-default" href="{{ url_for('logout') }}">
+                                    Log out
+                                </a>
+                            </p>
+                        {% else %}
+                            <p class="navbar-btn">
+                                <a type="button" class="btn btn-success" href="{{ url_for('login') }}">
+                                    Log in
+                                </a>
+                            </p>
+                        {% endif %}
                     {% endif %}
+                </div>
+            </div>
+        </nav>
 
-                    <!-- Template content renders here -->
-                {% endblock %}
-
+        <div class="container-fluid" style="max-width: 95%">
+            {% if error %}
+                <p class=error><strong>Error:</strong> {{ error }}</p>
+            {% endif %}
+            <br/>
+            {% block content %}
+                <!-- Template content renders here -->
+            {% endblock %}
         </div>
 
         <footer class="footer">
@@ -48,6 +64,8 @@
                 </script>
             </div>
         </footer>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
     </body>
 </html>

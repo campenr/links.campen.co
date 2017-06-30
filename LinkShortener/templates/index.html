@@ -2,27 +2,24 @@
 {% block content %}
 
     {% if current_user.is_authenticated %}
-        <div class="logout-button-wrapper">
-            <!-- <a href="/logout" class="button-link">Logout</a> -->
-            <button class="btn btn-default" onclick="window.location.href='/logout'">Log out</button>
-        </div>
-
         <div class="shorten-link-form">
             <form action="" method="post" name="shorten-link">
                 {{ link_form.hidden_tag() }}
                 <div class="input-group">
-                    {{ link_form.link(class="form-control", placeholder="Username") }}
+                    {{ link_form.link(class="form-control", placeholder="Enter a link") }}
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-primary">Shorten</button>
                     </span>
                 </div>
             </form>
         </div>
+
+        <br/>
         <br/>
 
         <div class="link-table-container">
             {% if data is not none %}
-            <!--<div class="table-responsive">-->
+            <div class="table-responsive">
                 <table class="table table-striped table-hover">
                     <colgroup>
                         <col class="col-1">
@@ -54,7 +51,7 @@
                                 </td>
                                 <td>
                                     <button class="btn btn-default copy-button" title="copy to clipboard">
-                                        <i class="fa fa-fw fa-clipboard" aria-hidden="true"></i>
+                                        <i class="fa fa-fw fa-files-o" aria-hidden="true"></i>
                                     </button>
                                 </td>
                                 <td>
@@ -69,16 +66,10 @@
                         {% endfor %}
                     </tbody>
                 </table>
-            <!--</div>-->
+            </div>
             {% else %}
                 <p>You don't have any links to display.</p>
             {% endif %}
-        </div>
-
-
-    {% else %}
-        <div class="login-button-wrapper">
-            <button onclick="window.location.href='/login'">Log in</button>
         </div>
     {% endif %}
 

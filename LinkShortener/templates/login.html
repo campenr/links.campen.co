@@ -4,35 +4,41 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
 
+            <br/>
+            <br/>
+            <br/>
+
             <div class="login-wrapper">
 
-                <h2 class="login-heading">Log in</h2>
+                <p>
+                    <form action="" method="post" name="login">
+                        {{ form.hidden_tag() }}
+
+                        <p>
+                            <label for="username" class="sr-only">Username</label>
+                            {{ form.username(class="form-control", placeholder="Username") }}
+
+                            <label for="password" class="sr-only">Password</label>
+                            {{ form.password(class="form-control", placeholder="Password") }}
+                        </p>
+
+                        <p>
+                            <button class="btn btn-primary btn-block" type="submit"><b>Sign in</b></button>
+                        </p>
+
+                    </form>
+                </p>
 
                 <br/>
 
-                <form action="" method="post" name="login">
-                    {{ form.hidden_tag() }}
-
-                    <label for="username" class="sr-only">Username</label>
-                    {{ form.username(class="form-control", placeholder="Username") }}
-
-                    <label for="password" class="sr-only">Password</label>
-                    {{ form.password(class="form-control", placeholder="Password") }}
-
-                    <br/>
-
-                    <button class="btn btn-primary btn-block" type="submit"><b>Sign in</b></button>
-
-                </form>
-
-                <br/>
-
-                <a href="{{ url_for('google_login') }}" class="btn btn-default btn-block google-login-button">
-                    <span class="google-logo">
-                            <img src="static/img/logo_google.png" width="18px" height="18px">
-                        </span>
-                    <span class="google-login-text"><b>Sign in with Google</b></span>
-                </a>
+                <p>
+                    <a href="{{ url_for('google_login') }}" class="btn btn-default btn-block google-login-button">
+                        <span class="google-logo">
+                                <img src="static/img/logo_google.png" width="18px" height="18px">
+                            </span>
+                        <span class="google-login-text"><b>Sign in with Google</b></span>
+                    </a>
+                </p>
 
             </div>
         </div>

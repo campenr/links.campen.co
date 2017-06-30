@@ -42,7 +42,8 @@ def index():
         links_data = Link.retrieve_links(owner=current_user)
         return render_template('index.html', data=links_data, link_form=link_form)
 
-    return render_template('index.html')
+    # return render_template('index.html')
+    return redirect(url_for('login'))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -88,7 +89,7 @@ def authorized():
 
     login_user(user)
     _next = request.args.get('next')
-    return redirect(_next or '/')
+    return redirect('/')
 
 
 @google.tokengetter
