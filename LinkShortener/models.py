@@ -32,6 +32,7 @@ class User(db.Model):
     username = db.Column(db.String(32), index=True, unique=True)
     email = db.Column(db.String(32), index=True, unique=True)
     password_hash = db.Column(db.String(120))
+    role = db.Column(db.String(32))
     links = db.relationship('Link', backref='owner', lazy='dynamic')
 
     @property
@@ -50,7 +51,7 @@ class User(db.Model):
         return str(self.id)
 
     @classmethod
-    def add_user(cls, username=None, email=None, password=None, api=False):
+    def add_user(cls, username=None, email=None, password=None, api=False, role='user'):
         """Add a new user to the User table and return the id of the user, else None."""
 
         user = User()
@@ -59,6 +60,7 @@ class User(db.Model):
         user.email = email
         if password is not None:
             user.password_hash = cls.hash_password(password)
+        user.role = role
 
         db.session.add(user)
         db.session.commit()

@@ -19,26 +19,61 @@
 }
 
 /*table*/.col-1 {
-    width: 45%;
+    width: 45% !important;
 }
 
 /*table*/.col-2 {
-    width: 17%;
+    width: 17% !important;
 }
 
 /*table*/.col-3 {
-    width: 30%;
+    width: 30% !important;
 }
 
 /*table*/.col-4 {
-    width: 4%;
+    width: 4% !important;
 }
 
 /*table*/.col-5 {
-    width: 4%;
+    width: 4% !important;
 }
 
 .table > tbody > tr > td {
     text-align: center !important;
     vertical-align: middle !important;
+}
+
+/* overwrite default jquery.datatables sorting icons */
+
+table.dataTable thead th {
+    position: relative;
+    /*left: 12px;*/
+    background-image: none !important;
+}
+
+table.dataTable thead th.sorting:after,
+table.dataTable thead th.sorting_asc:after,
+table.dataTable thead th.sorting_desc:after {
+    position: absolute;
+    left: 80px;
+    display: block;
+    font-family: FontAwesome;
+}
+
+table.dataTable thead th.sorting:after {
+    content: "\f0dc";
+    color: dark-grey;
+    bottom: 9px;
+    font-size: 0.8em;
+    padding-top: 0.12em;
+}
+table.dataTable thead th.sorting_asc:after {
+    content: "\f0de";
+    bottom: 4px;
+    color: black;
+}
+table.dataTable thead th.sorting_desc:after {
+    content: "\f0dd";
+    bottom: 10px;
+    color: black;
 }

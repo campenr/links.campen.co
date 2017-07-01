@@ -39,7 +39,31 @@
                         </tr>
                     </thead>
                     <tbody class="link-table-body">
-
+                       {% for row in data %}
+                            <tr id="{{ row['link_token'] }}">
+                                <td><a href="{{ row['link_url'] }}">{{ row['link_name'] }}</a></td>
+                                <td>{{ row['created'] | date_filter }}</td>
+                                <td class="link-token">
+                                    <a>{{ row['link_token'] }}</a>
+                                    {% if row['private'] == true %}
+                                        <i class="fa fa-fw fa-lock" aria-hidden="true"></i>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <button class="btn btn-default copy-button" title="copy to clipboard">
+                                        <i class="fa fa-fw fa-files-o" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <form action="{{ url_for('delete_link') }}" method="post" onsubmit="return confirm('Are you sure you want to delete this link? This action can not be undone.');">
+                                        <input type=hidden value="{{ row['link_token'] }}" name="link_token">
+                                        <button type="submit" class="btn btn-default" title="delete link">
+                                            <i class="fa fa-fw fa-trash-o" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

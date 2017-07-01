@@ -161,7 +161,7 @@ def view_link(link_token):
 #     return redirect(url_for('index'))
 
 
-@app.route('/link/delete', methods=['POST'])
+@app.route('/api/link/delete', methods=['POST'])
 @login_required
 def delete_link():
     """Delete supplied link from the database."""
@@ -174,3 +174,36 @@ def delete_link():
 
     return redirect(url_for('index'))
 
+@app.route('/api/links', methods=['GET'])
+@login_required
+def get_links():
+
+    r = request
+
+    links = Link.retrieve_links(owner=current_user)
+    records_filtered = len(links)
+
+    # format links
+    formatted_links = []
+    for link_record in links:
+        new_link_record = dict()
+        new_link_record['long_link'] = dict()
+        for k, v in link_record.items():
+
+            # need to rename sql table columns to match html tables
+            if k == 'link_name':
+                new_link_record['long_link']['name'] = v
+            elif k == 'created':
+                new_link_record['created'] = Link.format_date(v)
+            elif k == 'link_token':
+                new_link_record['short_link'] = v
+            elif k == 'link_url':
+                new_link_record['long_link']['url'] = v
+
+        # also need to add dummy elements for the buttons and send the link_token
+        new_link_record['copy'] = link_record['link_token']
+        new_link_record['delete'] = link_record['link_token']
+
+        formatted_links.append(new_link_record)
+
+    return jsonify({'data': formatted_links, 'recordsFiltered': records_filtered})
