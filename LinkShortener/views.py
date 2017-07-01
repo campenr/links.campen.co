@@ -3,9 +3,13 @@
 # This software is released under the Modified BSD license
 # See LICENSE.txt for the full license documentation
 
+import math
+
 from flask import redirect, render_template, abort, request, url_for, session, jsonify
 from flask_login import login_user, logout_user, current_user
 from flask_login import login_required
+
+from sqlalchemy import desc
 
 from LinkShortener import app, google
 from LinkShortener.forms import LoginForm, LinkForm
@@ -178,32 +182,50 @@ def delete_link():
 @login_required
 def get_links():
 
-    r = request
+    # get table sorting preferences from request
+    r = request.args
 
-    links = Link.retrieve_links(owner=current_user)
-    records_filtered = len(links)
+    sort_column = r['column']
+    if sort_column == 'long_link':
+        sort_column = 'link_name'
+    elif sort_column == 'short_link':
+        sort_column = 'link_token'
+    sort_desc = r['desc'] == 'true'
+    page_start = int(r['start'])
+
+    PAGE_COUNT = 10
+    if page_start == 0:
+        page_number = 1
+    else:
+        page_number = ( page_start // PAGE_COUNT ) + 1
+
+    query = Link.query
+    query = query.filter_by(owner=current_user)
+
+    if sort_desc:
+        records = query.order_by(desc(sort_column)).paginate(page=page_number, per_page=PAGE_COUNT, error_out=False)
+    else:
+        records = query.order_by(sort_column).paginate(page=page_number, per_page=PAGE_COUNT, error_out=False)
+
+    link_records = records.items
 
     # format links
     formatted_links = []
-    for link_record in links:
+    for link_record in link_records:
+
         new_link_record = dict()
         new_link_record['long_link'] = dict()
-        for k, v in link_record.items():
 
-            # need to rename sql table columns to match html tables
-            if k == 'link_name':
-                new_link_record['long_link']['name'] = v
-            elif k == 'created':
-                new_link_record['created'] = Link.format_date(v)
-            elif k == 'link_token':
-                new_link_record['short_link'] = v
-            elif k == 'link_url':
-                new_link_record['long_link']['url'] = v
+        # format record values
+        new_link_record['long_link']['name'] = link_record.link_name
+        new_link_record['long_link']['url'] = link_record.link_url
+        new_link_record['created'] = link_record.created
+        new_link_record['short_link'] = link_record.link_token
 
         # also need to add dummy elements for the buttons and send the link_token
-        new_link_record['copy'] = link_record['link_token']
-        new_link_record['delete'] = link_record['link_token']
+        new_link_record['copy'] = link_record.link_token
+        new_link_record['delete'] = link_record.link_token
 
         formatted_links.append(new_link_record)
 
-    return jsonify({'data': formatted_links, 'recordsFiltered': records_filtered})
+    return jsonify({'data': formatted_links, 'recordsTotal': records.total, 'recordsFiltered': records.total})

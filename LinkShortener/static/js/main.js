@@ -24,13 +24,15 @@ $(document).ready(function(){
                 // get currently sorted column and direction
                 var sortedColumnNum = result['order'][0]['column'];
                 var sortedColumn = result['columns'][sortedColumnNum]['name'];
+                var pageStart = result['start']
 
                 var sortDirection = result['order'][0]['dir'];
                 var sortDesc = sortDirection == 'desc';
 
                 var newData = {
                     'column': sortedColumn,
-                    'desc': sortDesc
+                    'desc': sortDesc,
+                    'start': pageStart
                     }
 
                 return newData;

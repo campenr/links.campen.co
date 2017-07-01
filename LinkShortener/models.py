@@ -11,7 +11,41 @@ from passlib.apps import custom_app_context as pwd_context
 from sqlalchemy import desc
 
 
-class User(db.Model):
+class BaseModel(db.Model):
+
+    __abstract__ = True
+
+    @classmethod
+    def get_many(cls, order_by='id', descending=True, page_number=1, page_count=10):
+        """
+        Return a paginated list of multiple records from a table, optionally filtered.
+        :param order_by: (optional; default=`id`) which column in the table to order results by
+        :param descending: (optional; default=`True`) whether to return the records in descending order
+        :param page_number: which page of the results to return
+        :param page_count: number of results to return per page
+        :type order_by: str
+        :type descending: bool
+        :type page_number: int
+        :type page_count: int
+        :return: paginated query results
+        .. note:: the descending argument for get_many refers to the way the data is displayed when returned, which is
+            the inverse of how the data is ordered in the database. This is because the data in the SQL database is
+            ordered oldest to newest, i.e. ascending, by default.
+        """
+
+        # get base query
+        query_ = cls.query
+
+        # invert the descending argument due to the reverse order that data is ordered in the db
+        descending = not descending
+
+        if descending:
+            return query_.order_by(desc(order_by)).paginate(page_number, page_count, False)
+        else:
+            return query_.order_by(order_by).paginate(page_number, page_count, False)
+
+
+class User(BaseModel):
     """User table object representation.
 
     Columns
@@ -93,7 +127,7 @@ class User(db.Model):
             return '<User %r>' % self.email
 
 
-class Link(db.Model):
+class Link(BaseModel):
     """Link table object representation.
 
     Columns
@@ -144,7 +178,7 @@ class Link(db.Model):
     def retrieve_links(cls, owner=None):
         """Return a list of link objects as dictionaries, optionally filtered by owner, else None."""
 
-        # TODO implement pagination
+        # # TODO implement pagination
         if owner is None:
             result = cls.query().order_by(desc(Link.created)).all()
         else:
