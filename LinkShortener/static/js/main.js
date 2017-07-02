@@ -3,6 +3,7 @@ $(document).ready(function(){
     // Instantiate data table contents from ajax call
     var linkTable = $('#link-table').DataTable({
         "autoWidth": false,
+        "info": false,
         "lengthChange": false,
         "order": [[ 1, "desc" ]],
         "searching": false,

@@ -54,7 +54,7 @@ def get_links():
         # format record values
         new_link_record['long_link']['name'] = link_record.link_name
         new_link_record['long_link']['url'] = link_record.link_url
-        new_link_record['created'] = link_record.created
+        new_link_record['created'] = Link.format_date(link_record.created)
         new_link_record['short_link'] = link_record.link_token
 
         # also need to add dummy elements for the buttons and send the link_token
@@ -78,3 +78,6 @@ def delete_link():
         print(e)
 
     return redirect(url_for('index'))
+
+# TODO: add api for adding a link to make full use of the the ajax calls
+# TODO: add api for deleting a link to make full use of the the ajax calls

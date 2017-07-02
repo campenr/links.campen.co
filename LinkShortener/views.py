@@ -5,18 +5,18 @@
 
 import math
 
-from flask import redirect, render_template, abort, request, url_for, session, jsonify
+from flask import flash, redirect, render_template, abort, request, url_for, session, jsonify
 from flask_login import login_user, logout_user, current_user
 from flask_login import login_required
 
 from sqlalchemy import desc
 
-from LinkShortener import app, google
+from LinkShortener import app, db, google
 from LinkShortener.forms import LoginForm, LinkForm
 from LinkShortener.models import User, Link
 
 # TODO implement flash messages
-
+# TODO: add admin interface
 
 @app.login_manager.user_loader
 def load_user(user_id):
@@ -37,10 +37,19 @@ def index():
         if request.method == 'POST' and link_form.validate_on_submit():
 
             try:
+
+                # if the current user is only a guest they can't exceed more than 10 links
+                if current_user.role == 'guest':
+                    links_number = Link.query.filter_by(owner=current_user).count()
+                    if links_number >= 10:
+                        flash('Number of links exceeded. Please delete a link before creating a new one.', 'danger')
+                        return redirect(url_for('index'))
+
                 Link.add_link(submitted_link=link_form.link.data, user=current_user)
                 return redirect(url_for('index'))
             except Exception as e:
                 # TODO add flash message about failed attempt to add a link? Or send response JSON?
+                flash('Failed to add link. Please refresh and try again.', 'danger')
                 print(e)
 
         links_data = Link.retrieve_links(owner=current_user)
@@ -84,15 +93,17 @@ def authorized():
             request.args['error_description']
         )
     session['google_token'] = (resp['access_token'], '')
-    me = google.get('userinfo')
+    user_info = google.get('userinfo')
 
-    # username is the users email if logging in with google oauth2
-    user = User.query.filter_by(email=me.data['email']).limit(1).first()
+    # use the users email address as the unique identifier if logging in with google oauth2
+    user = User.query.filter_by(email=user_info.data['email']).limit(1).first()
     if user is None:
-        user = User.add_user(email=me.data['email'])
+        # if first time logging in create a new user of account type guest
+        user = User(email=user_info.data['email'], role='guest')
+        db.session.add(user)
+        db.session.commit()
 
     login_user(user)
-    _next = request.args.get('next')
     return redirect('/')
 
 
@@ -106,7 +117,7 @@ def get_google_oauth_token():
 def logout():
     """Route for logging out user."""
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 
 @app.route('/<link_token>', methods=['GET'])

@@ -21,7 +21,7 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header pull-left">
                     <a class="navbar-brand" href="{{ url_for('index') }}">Link Shortener</a>
@@ -47,14 +47,27 @@
             </div>
         </nav>
 
-        <div class="container-fluid" style="max-width: 95%">
-            {% if error %}
-                <p class=error><strong>Error:</strong> {{ error }}</p>
-            {% endif %}
+        <div class="container-fluid" style="max-width: 95%; padding-top: 70px;">
+
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    <div class="messages">
+                        {% for cat, message in messages %}
+                            <div class="alert alert-{{ cat if cat in ['success', 'info', 'warning', 'danger'] else 'warning' }} alert-dismissible fade in" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
             <br/>
+
             {% block content %}
                 <!-- Template content renders here -->
             {% endblock %}
+
         </div>
 
         <footer class="footer">

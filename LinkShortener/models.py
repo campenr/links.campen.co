@@ -294,3 +294,5 @@ class Link(BaseModel):
 
         else:
             return '%s %s, %s' % (month_dict[created.month], created.day, created.year)
+
+    # TODO: implement limit on number of links for guest users, unlimited to normal users and admins
