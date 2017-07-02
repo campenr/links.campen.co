@@ -18,9 +18,27 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.13/clipboard.min.js"></script>
         <script src="static/js/main.js"></script>
+
+        {# cookie notification popup #}
+        <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+        <script>
+        window.addEventListener("load", function(){
+        window.cookieconsent.initialise({
+          "palette": {
+            "popup": {
+              "background": "#000"
+            },
+            "button": {
+              "background": "#f1d600"
+            }
+          }
+        })});
+        </script>
+
     </head>
 
     <body>
+
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header pull-left">
@@ -47,38 +65,51 @@
             </div>
         </nav>
 
-        <div class="container-fluid" style="max-width: 95%; padding-top: 70px;">
+        <div class="main-wrapper">
+            <div class="container-fluid" style="max-width: 95%; padding-top: 70px;">
 
-            {% with messages = get_flashed_messages(with_categories=True) %}
-                {% if messages %}
-                    <div class="messages">
-                        {% for cat, message in messages %}
-                            <div class="alert alert-{{ cat if cat in ['success', 'info', 'warning', 'danger'] else 'warning' }} alert-dismissible fade in" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            {{ message }}
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            {% endwith %}
+                {% with messages = get_flashed_messages(with_categories=True) %}
+                    {% if messages %}
+                        <div class="messages">
+                            {% for cat, message in messages %}
+                                <div class="alert alert-{{ cat if cat in ['success', 'info', 'warning', 'danger'] else 'warning' }} alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                {{ message }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
 
-            <br/>
+                <br/>
 
-            {% block content %}
-                <!-- Template content renders here -->
-            {% endblock %}
+                {% block content %}
+                    <!-- Template content renders here -->
+                {% endblock %}
+
+            </div>
+
+            {# for help getting the footer placement correc #}
+            <div class="push"></div>
 
         </div>
 
         <footer class="footer">
-            <div class="footer-content">
-                <p class="version">v0.3.2</p>
-                <div id='copyright'></div>
+            <div class="container text-center">
+                <p>
+                    <span id="copyright"></span> Richard Campen
+                </p>
+                <p>
+                    <a href="{{ url_for('tos') }}">Terms of Service</a>
+                    and
+                    <a href="{{ url_for('privacy') }}">Privacy Policy.</a>
+                    This site uses cookies.
+                </p>
                 <script>
                     var year = new Date().getFullYear();
-                    var timer = document.createElement('div');
-                    timer.innerHTML = "Copyright &#169; " + year + " <a href=\"http://campen.co\">Richard Campen</a>";
-                    document.getElementById('copyright').appendChild(timer);
+                    var timer = document.getElementById('copyright');
+                    copyrightText = "&#169; " + year;
+                    timer.innerHTML = copyrightText;
                 </script>
             </div>
         </footer>

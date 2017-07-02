@@ -7,6 +7,7 @@ $(document).ready(function(){
         "lengthChange": false,
         "order": [[ 1, "desc" ]],
         "searching": false,
+        "processing": true,
         "serverSide": true,
         columns: [
             {name: 'long_link', data: 'long_link'},
