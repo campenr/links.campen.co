@@ -59,6 +59,20 @@ def index():
     return redirect(url_for('login'))
 
 
+@app.route('/privacy')
+def privacy():
+    """Route for displaying the website's privacy policy page."""
+
+    return render_template('privacy.html')
+
+
+@app.route('/tos')
+def tos():
+    """Route for displaying the website's terms of service page."""
+
+    return render_template('tos.html')
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """Route for displaying login page and redirects to index or next page if supplied in request."""
