@@ -1,16 +1,22 @@
 # Project dev files
 .idea
+.vagrant
 
-# venv files
-venv/
+# log files
+*.log
+
+# secrets
+ansible/vault_passwords/*
 
 # pycache files
 __pycache__/
 
-# alembic db migration files
-migrations/
+# python C files
+*.pyc
+
+# keep these!
+!.keep
 
 # Ignore all files in the config folder, except the example configuration file
 # This hides super secret config files!
-config/*
-!config/example_config.py
+config.py

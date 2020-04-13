@@ -1,8 +1,3 @@
-# Copyright 2016 Richard Campen
-# All rights reserved
-# This software is released under the Modified BSD license
-# See LICENSE.txt for the full license documentation
-
 import math
 
 from flask import flash, redirect, render_template, abort, request, url_for, session, jsonify
@@ -11,14 +6,14 @@ from flask_login import login_required
 
 from sqlalchemy import desc
 
-from LinkShortener import app, db, google
-from LinkShortener.forms import LoginForm, LinkForm
-from LinkShortener.models import User, Link
+from app import flask_app, db, google
+from app.forms import LoginForm, LinkForm
+from app.models import User, Link
 
 # TODO implement flash messages
 # TODO: add admin interface
 
-@app.login_manager.user_loader
+@flask_app.login_manager.user_loader
 def load_user(user_id):
     user = User.query.filter_by(id=user_id).limit(1).first()
     return user
@@ -26,8 +21,8 @@ def load_user(user_id):
 # TODO implement better logging of activity
 
 
-@app.route('/', methods=['GET', 'POST'])
-@app.route('/index', methods=['GET', 'POST'])
+@flask_app.route('/', methods=['GET', 'POST'])
+@flask_app.route('/index', methods=['GET', 'POST'])
 def index():
     """Route for displaying index page."""
 
@@ -59,21 +54,21 @@ def index():
     return redirect(url_for('login'))
 
 
-@app.route('/privacy')
+@flask_app.route('/privacy')
 def privacy():
     """Route for displaying the website's privacy policy page."""
 
     return render_template('privacy.html')
 
 
-@app.route('/tos')
+@flask_app.route('/tos')
 def tos():
     """Route for displaying the website's terms of service page."""
 
     return render_template('tos.html')
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@flask_app.route('/login', methods=['GET', 'POST'])
 def login():
     """Route for displaying login page and redirects to index or next page if supplied in request."""
 
@@ -91,14 +86,14 @@ def login():
     return render_template('login.html', title='Log In', form=form)
 
 
-@app.route('/login/google', methods=['GET', 'POST'])
+@flask_app.route('/login/google', methods=['GET', 'POST'])
 def google_login():
     """Route for logging in user with Google OAuth2"""
 
     return google.authorize(callback=url_for('authorized', _external=True))
 
 
-@app.route('/login/authorized')
+@flask_app.route('/login/authorized')
 def authorized():
     resp = google.authorized_response()
     if resp is None:
@@ -126,7 +121,7 @@ def get_google_oauth_token():
     return session.get('google_token')
 
 
-@app.route('/logout')
+@flask_app.route('/logout')
 @login_required
 def logout():
     """Route for logging out user."""
@@ -134,8 +129,8 @@ def logout():
     return redirect(url_for('login'))
 
 
-@app.route('/<link_token>', methods=['GET'])
-@app.route('/link/<link_token>', methods=['GET'])
+@flask_app.route('/<link_token>', methods=['GET'])
+@flask_app.route('/link/<link_token>', methods=['GET'])
 def view_link(link_token):
     """Default route for viewing a link."""
 
@@ -149,7 +144,7 @@ def view_link(link_token):
             return redirect(link_data['link_url'], code=307)
 
 
-# @app.route('/link/private/<link_token>', methods=['GET'])
+# @flask_app.route('/link/private/<link_token>', methods=['GET'])
 # @login_required
 # def view_private_link(link_token):
 #     """Route for viewing a private link.
@@ -168,7 +163,7 @@ def view_link(link_token):
 #         return redirect(link_data['link_url'], code=307)
 #
 #
-# @app.route('/link/add', methods=['POST'])
+# @flask_app.route('/link/add', methods=['POST'])
 # @login_required
 # def add_link():
 #     """Add supplied link to the database."""

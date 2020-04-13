@@ -10,7 +10,7 @@ from sqlalchemy.exc import IntegrityError
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from LinkShortener.models import User
+from app.models import User
 
 
 def add_user():
