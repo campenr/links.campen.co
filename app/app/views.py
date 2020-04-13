@@ -6,12 +6,13 @@ from flask_login import login_required
 
 from sqlalchemy import desc
 
-from app import flask_app, db, google
+from app import flask_app, db, oauth
 from app.forms import LoginForm, LinkForm
 from app.models import User, Link
 
 # TODO implement flash messages
 # TODO: add admin interface
+
 
 @flask_app.login_manager.user_loader
 def load_user(user_id):
@@ -89,23 +90,27 @@ def login():
 @flask_app.route('/login/google', methods=['GET', 'POST'])
 def google_login():
     """Route for logging in user with Google OAuth2"""
-
-    return google.authorize(callback=url_for('authorized', _external=True))
+    redirect_uri = url_for('authorize', _external=True)
+    return oauth.google.authorize_redirect(redirect_uri)
 
 
 @flask_app.route('/login/authorized')
-def authorized():
-    resp = google.authorized_response()
-    if resp is None:
+def authorize():
+    token = oauth.google.authorize_access_token()
+    if token is None:
         return 'Access denied: reason=%s error=%s' % (
             request.args['error_reason'],
             request.args['error_description']
         )
-    session['google_token'] = (resp['access_token'], '')
-    user_info = google.get('userinfo')
 
+    user_info = oauth.google.get('userinfo')
     # use the users email address as the unique identifier if logging in with google oauth2
-    user = User.query.filter_by(email=user_info.data['email']).limit(1).first()
+    email = user_info.json().get('email')
+    if email is None:
+        # TODO: add messaging here. for now just fail silently
+        return redirect('/')
+
+    user = User.query.filter_by(email=email).limit(1).first()
     if user is None:
         # if first time logging in create a new user of account type guest
         user = User(email=user_info.data['email'], role='guest')
@@ -113,12 +118,8 @@ def authorized():
         db.session.commit()
 
     login_user(user)
+
     return redirect('/')
-
-
-@google.tokengetter
-def get_google_oauth_token():
-    return session.get('google_token')
 
 
 @flask_app.route('/logout')
