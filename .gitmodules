@@ -1,0 +1,21 @@
+[submodule "ansible/roles/flask"]
+	path = ansible/roles/flask
+	url = git@github.com:campenr/ansible-role-flask.git
+[submodule "ansible/roles/nginx"]
+	path = ansible/roles/nginx
+	url = git@github.com:campenr/ansible-role-nginx.git
+[submodule "ansible/roles/postgres"]
+	path = ansible/roles/postgres
+	url = git@github.com:campenr/ansible-role-postgres.git
+[submodule "ansible/roles/python"]
+	path = ansible/roles/python
+	url = git@github.com:campenr/ansible-role-python.git
+[submodule "ansible/roles/security"]
+	path = ansible/roles/security
+	url = git@github.com:campenr/ansible-role-security.git
+[submodule "ansible/roles/ubuntu"]
+	path = ansible/roles/ubuntu
+	url = git@github.com:campenr/ansible-role-ubuntu.git
+[submodule "ansible/roles/uwsgi"]
+	path = ansible/roles/uwsgi
+	url = git@github.com:campenr/ansible-role-uwsgi.git

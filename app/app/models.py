@@ -1,12 +1,7 @@
-# Copyright 2016 Richard Campen
-# All rights reserved
-# This software is released under the Modified BSD license
-# See LICENSE.txt for the full license documentation
-
 import string
 import random
 import datetime
-from LinkShortener import db
+from app import db
 from passlib.apps import custom_app_context as pwd_context
 from sqlalchemy import desc
 

@@ -1,0 +1,53 @@
+---
+app_name: link-shortener
+app_user_name: vagrant
+app_domain: links.campen.co
+app_root: "/home/{{ app_user_name }}/"
+app_virtualenv: "{{ app_root }}venv/"
+app_config_path: "{{ app_root }}config/"
+app_log_path: "{{ app_root }}logs/"
+
+ubuntu_host_name: "{{ app_name }}-dev"
+
+virtual_environments:
+  - path: "{{ app_virtualenv }}"
+    user: "{{ app_user_name }}"
+    python_version: python3
+    requirements_file: "{{ app_root }}app/requirements.txt"
+
+postgres_dbs:
+  - name: "{{ app_name }}"
+    user: "{{ app_user_name }}"
+    password: password
+
+flask_apps:
+  - root_dir: "{{ app_root }}"
+    venv_dir: "{{ app_virtualenv }}"
+
+supervisor_users:
+  - "{{ app_user_name }}"
+
+uwsgi_emperor_mode: False
+uwsgi_apps:
+  - name: "{{ app_name }}"
+    user: "{{ app_user_name }}"
+    root_dir: "{{ app_root }}app"
+    venv_dir: "{{ app_virtualenv }}"
+    wsgi_file: wsgi.py
+    callable: flask_app
+    socket_dir: "/var/uwsgi/{{ app_name }}/"
+    log_dir: "{{ app_log_path }}uwsgi/"
+    config_dir: "{{ app_config_path }}uwsgi/"
+    stats_port: "5151"
+    py_autoreload: "1"  # enable auto-reload of the dev server
+
+nginx_virtual_servers:
+  - name: "{{ app_name }}"
+    user: "{{ app_user_name }}"
+    domain: "_"
+    config_dir: "{{ app_config_path }}nginx/"
+    socket_dir: "/var/uwsgi/{{ app_name }}/"
+    root_dir: "{{ app_root }}app"
+    log_dir: "{{ app_log_path }}nginx/"
+    aliases:
+      - l.campen.co

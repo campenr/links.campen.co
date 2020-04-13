@@ -1,19 +1,14 @@
-# Copyright 2016 Richard Campen
-# All rights reserved
-# This software is released under the Modified BSD license
-# See LICENSE.txt for the full license documentation
-
 from flask import redirect, request, url_for, jsonify
 from flask_login import current_user
 from flask_login import login_required
 
 from sqlalchemy import desc
 
-from LinkShortener import app
-from LinkShortener.models import User, Link
+from app import flask_app
+from app.models import User, Link
 
 
-@app.route('/api/links', methods=['GET'])
+@flask_app.route('/api/links', methods=['GET'])
 @login_required
 def get_links():
 
@@ -66,7 +61,7 @@ def get_links():
     return jsonify({'data': formatted_links, 'recordsTotal': records.total, 'recordsFiltered': records.total})
 
 
-@app.route('/api/link/delete', methods=['POST'])
+@flask_app.route('/api/link/delete', methods=['POST'])
 @login_required
 def delete_link():
     """Delete supplied link from the database."""

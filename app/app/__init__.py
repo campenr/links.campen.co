@@ -1,28 +1,19 @@
-# Copyright 2016 Richard Campen
-# All rights reserved
-# This software is released under the Modified BSD license
-# See LICENSE.txt for the full license documentation
-
-"""
-LinkShortener v0.4.0
-
-A Flask app for creating/managing short links for longer length URLs.
-"""
-
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_oauthlib.client import OAuth
 
-app = Flask(__name__)
-app.config.from_object('config')
-db = SQLAlchemy(app)
-oauth = OAuth(app)
+
+flask_app = Flask(__name__)
+
+flask_app.config.from_object('config')
+db = SQLAlchemy(flask_app)
+oauth = OAuth(flask_app)
 
 google = oauth.remote_app(
     'google',
-    consumer_key=app.config.get('GOOGLE_OAUTH')['client_id'],
-    consumer_secret=app.config.get('GOOGLE_OAUTH')['client_secret'],
+    consumer_key=flask_app.config.get('GOOGLE_OAUTH')['client_id'],
+    consumer_secret=flask_app.config.get('GOOGLE_OAUTH')['client_secret'],
     request_token_params={'scope': 'https://www.googleapis.com/auth/userinfo.email'},
     base_url='https://www.googleapis.com/oauth2/v1/',
     request_token_url=None,
@@ -32,7 +23,7 @@ google = oauth.remote_app(
 )
 
 login_manager = LoginManager()
-login_manager.init_app(app)
+login_manager.init_app(flask_app)
 login_manager.login_view = "login"
 
-from LinkShortener import views, models, forms, api
+from app import views, models, forms, api

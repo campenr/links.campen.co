@@ -1,0 +1,18 @@
+---
+- hosts: development
+  become: yes
+  become_method: sudo
+  roles:
+    - ubuntu
+    - python
+    - postgres
+    - flask
+    - uwsgi
+    - nginx
+
+#- hosts: production
+#  remote_user: link-shortener
+#  roles:
+#    - python
+#    - flask
+#    - uwsgi
