@@ -23,6 +23,16 @@ postgres_dbs:
 flask_apps:
   - root_dir: "{{ app_root }}"
     venv_dir: "{{ app_virtualenv }}"
+    user: "{{ app_user_name }}"
+    config:
+      - key: SECRET_KEY
+        value: "'thisisasupersecretkey'"
+      - key: SQLALCHEMY_DATABASE_URI
+        value: "'postgresql://{{ app_user_name }}:password@localhost:5432/{{ app_name }}'"
+      - key: GOOGLE_OAUTH_CLIENT_ID
+        value: "'647134572594-eo6f7hjkl2n6ke90g3dkjcnib868rr9r.apps.googleusercontent.com'"
+      - key: GOOGLE_OAUTH_CLIENT_SECRET
+        value: "{{ vault_google_oauth_client_secret }}"
 
 supervisor_users:
   - "{{ app_user_name }}"
