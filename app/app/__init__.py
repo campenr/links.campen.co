@@ -12,8 +12,8 @@ oauth = OAuth(flask_app)
 
 oauth.register(
     name='google',
-    client_id=flask_app.config.get('GOOGLE_OAUTH')['client_id'],
-    client_secret=flask_app.config.get('GOOGLE_OAUTH')['client_secret'],
+    client_id=flask_app.config.get('GOOGLE_OAUTH_CLIENT_ID'),
+    client_secret=flask_app.config.get('GOOGLE_OAUTH_CLIENT_SECRET'),
     client_kwargs={'scope': 'https://www.googleapis.com/auth/userinfo.email'},
     api_base_url='https://www.googleapis.com/oauth2/v1/',
     request_token_url=None,

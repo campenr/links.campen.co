@@ -94,7 +94,7 @@ def google_login():
     return oauth.google.authorize_redirect(redirect_uri)
 
 
-@flask_app.route('/login/authorized')
+@flask_app.route('/login/authorize')
 def authorize():
     token = oauth.google.authorize_access_token()
     if token is None:
@@ -113,7 +113,7 @@ def authorize():
     user = User.query.filter_by(email=email).limit(1).first()
     if user is None:
         # if first time logging in create a new user of account type guest
-        user = User(email=user_info.data['email'], role='guest')
+        user = User(email=email, role='guest')
         db.session.add(user)
         db.session.commit()
 

@@ -11,8 +11,9 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 80, host: 5011
 
   config.vm.provision :ansible do |ansible|
+    ansible.config_file = "ansible/ansible.cfg"
     ansible.playbook = "ansible/playbook.yml"
-    ansible.inventory_path = "ansible/hosts.ini"
+    ansible.inventory_path = "ansible/inventory.ini"
     ansible.limit = "development"
     ansible.verbose = true
   end
