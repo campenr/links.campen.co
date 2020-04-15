@@ -10,9 +10,9 @@
     - uwsgi
     - nginx
 
-#- hosts: production
-#  remote_user: link-shortener
-#  roles:
-#    - python
-#    - flask
-#    - uwsgi
+- hosts: production
+  remote_user: link-shortener
+  roles:
+    - python
+    - flask
+    - uwsgi
