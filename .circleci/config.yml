@@ -20,4 +20,4 @@ jobs:
           command: |
             rsync -v --archive --no-owner --no-group --delete --exclude="*.pyc" app link-shortener@vps1.campen.co:~/
             echo $PRODUCTION_VAULT_PASS > ./ansible/vault_passwords/production
-            cd ansible && ansible-playbook playbook.yml -i ./hosts.ini -l production -t app-configure -v
+            cd ansible && ansible-playbook playbook.yml -i ./hosts.ini -l production -t app-configure -v --vault-password-file=./vault_passwords/production
