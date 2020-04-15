@@ -9,7 +9,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "f9:13:53:26:23:82:07:3c:47:3a:3f:02:a8:5c:3c:3c"
+            - "01:e3:85:7f:96:22:93:ac:b8:5e:06:ef:88:dc:84:e1"
       - run: ssh-keyscan vps1.campen.co >> ~/.ssh/known_hosts
       - checkout
       - run: git submodule sync && git submodule update --init
