@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.6-stretch
+    branches:
+      only:
+        - feature/vagrant
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "f9:13:53:26:23:82:07:3c:47:3a:3f:02:a8:5c:3c:3c"
+      - run: ssh-keyscan vps1.campen.co >> ~/.ssh/known_hosts
+      - checkout
+      - run: git submodule sync && git submodule update --init
+      - run: sudo apt-get install -y rsync
+      - run: pip install ansible
+      - deploy:
+          name: deploy
+          command: |
+            rsync -v --archive --no-owner --no-group --delete --exclude="*.pyc" app link-shortener@vps1.campen.co:~/
+            echo $PRODUCTION_VAULT_PASS > ./ansible/vault_passwords/production
+            cd ansible && ansible-playbook playbook.yml -i ./hosts.ini -l production -t app-configure -v
