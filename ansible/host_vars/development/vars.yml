@@ -34,10 +34,6 @@ flask_apps:
       - key: GOOGLE_OAUTH_CLIENT_SECRET
         value: "{{ vault_google_oauth_client_secret }}"
 
-supervisor_users:
-  - "{{ app_user_name }}"
-
-uwsgi_emperor_mode: False
 uwsgi_apps:
   - name: "{{ app_name }}"
     user: "{{ app_user_name }}"
@@ -48,8 +44,7 @@ uwsgi_apps:
     socket_dir: "/var/uwsgi/{{ app_name }}/"
     log_dir: "{{ app_log_path }}uwsgi/"
     config_dir: "{{ app_config_path }}uwsgi/"
-    stats_port: "5151"
-    py_autoreload: "1"  # enable auto-reload of the dev server
+    stats_port: "5152"
 
 nginx_virtual_servers:
   - name: "{{ app_name }}"
@@ -59,5 +54,3 @@ nginx_virtual_servers:
     socket_dir: "/var/uwsgi/{{ app_name }}/"
     root_dir: "{{ app_root }}app"
     log_dir: "{{ app_log_path }}nginx/"
-    aliases:
-      - l.campen.co

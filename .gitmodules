@@ -19,3 +19,6 @@
 [submodule "ansible/roles/uwsgi"]
 	path = ansible/roles/uwsgi
 	url = git@github.com:campenr/ansible-role-uwsgi.git
+[submodule "ansible/host_vars/production"]
+	path = ansible/host_vars/production
+	url = git@github.com:campenr/ansible-host-links.campen.co.git
