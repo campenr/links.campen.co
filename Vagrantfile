@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
     ansible.playbook = "ansible/playbook.yml"
     ansible.inventory_path = "ansible/hosts.ini"
     ansible.limit = "development"
-    ansible.verbose = true
+    ansible.verbose = "v"
   end
 
   config.vm.provider "virtualbox" do |v|
