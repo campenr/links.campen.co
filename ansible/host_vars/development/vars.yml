@@ -9,11 +9,10 @@ app_log_path: "{{ app_root }}logs/"
 
 ubuntu_host_name: "{{ app_name }}-dev"
 
-virtual_environments:
-  - path: "{{ app_virtualenv }}"
-    user: "{{ app_user_name }}"
-    python_version: python3
-    requirements_file: "{{ app_root }}app/requirements.txt"
+python_environments:
+  - user: "{{ app_user_name }}"
+    venv_path: "{{ app_virtualenv }}"
+    pyproject_dir: "{{ app_root }}app/"
 
 postgres_dbs:
   - name: "{{ app_name }}"
