@@ -1,4 +1,6 @@
-import 'bootstrap';
+require('bootstrap');
+const Clipboard = require('clipboard');
+const $ = require('jquery');
 require('datatables.net-bs4');
 
 $(document).ready(function(){
@@ -32,15 +34,13 @@ $(document).ready(function(){
                 var pageStart = result['start']
 
                 var sortDirection = result['order'][0]['dir'];
-                var sortDesc = sortDirection == 'desc';
+                var sortDesc = sortDirection === 'desc';
 
-                var newData = {
+                return {
                     'column': sortedColumn,
                     'desc': sortDesc,
                     'start': pageStart
-                    }
-
-                return newData;
+                }
             }
         },
         "columnDefs": [
@@ -65,7 +65,7 @@ $(document).ready(function(){
                 // add copy button for this link
                 "targets": 3,
                 "render": function ( data, type, full, meta ) {
-                    return '<button class="btn btn-default copy-button" title="copy to clipboard" data-clipboard-text="' + location.protocol + '//' + location.host + '/' + data + '"><i class="fa fa-fw fa-files-o" aria-hidden="true"></i></button>'
+                    return '<button class="btn btn-default copy-button" title="copy to clipboard" data-clipboard-text="' + location.protocol + '//' + location.host + '/' + data + '"><i class="fal fa-copy" aria-hidden="true"></i></button>'
                 }
             },
             {
@@ -75,7 +75,7 @@ $(document).ready(function(){
                     return '<form action="/api/link/delete" method="post" onsubmit="return confirm(\'Are you sure you want to delete this link? This action can not be undone.\');">'
                             +  '<input type=hidden value="' + data + '" name="link_token">'
                             +      '<button type="submit" class="btn btn-default" title="delete link">'
-                            +          '<i class="fa fa-fw fa-trash-o" aria-hidden="true"></i>'
+                            +          '<i class="fal fa-trash" aria-hidden="true"></i>'
                             +      '</button>'
                             + '</form>'
                 }

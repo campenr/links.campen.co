@@ -1,92 +1,38 @@
 {% from "macros.html" import webpack_watch_livereload with context %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-nz">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <title>Link Shortener</title>
 
         <link rel="stylesheet" href="{{ static_chunk('main.css') }}">
+        <link rel="stylesheet" href="{{ static_chunk('vendors~main.css') }}">
+
+        {% block head %}
+            {# page specific head_content goes here. #}
+        {% endblock %}
+
     </head>
 
-    <body>
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header pull-left">
-                    <a class="navbar-brand" href="{{ url_for('index') }}">Link Shortener</a>
-                </div>
-                <div class="navbar-header pull-right">
-                    {# don't want to show sign in button on sign in page #}
-                    {% if request.endpoint != 'login' %}
-                        {% if current_user.is_authenticated %}
-                            <p class="navbar-btn" style="padding-right: 10px;">
-                                <a type="button" class="btn btn-default" href="{{ url_for('logout') }}">
-                                    Log out
-                                </a>
-                            </p>
-                        {% else %}
-                            <p class="navbar-btn">
-                                <a type="button" class="btn btn-success" href="{{ url_for('login') }}">
-                                    Log in
-                                </a>
-                            </p>
-                        {% endif %}
-                    {% endif %}
-                </div>
-            </div>
-        </nav>
+    <body class="main-wrapper">
 
-        <div class="main-wrapper">
-            <div class="container-fluid" style="max-width: 95%; padding-top: 70px;">
+        {% include 'partials/header.html' %}
 
-                {% with messages = get_flashed_messages(with_categories=True) %}
-                    {% if messages %}
-                        <div class="messages">
-                            {% for cat, message in messages %}
-                                <div class="alert alert-{{ cat if cat in ['success', 'info', 'warning', 'danger'] else 'warning' }} alert-dismissible fade in" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                {{ message }}
-                                </div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                {% endwith %}
+        <div class="container-fluid main-content">
 
-                <br/>
+            {% include 'partials/messages.html' %}
 
-                {% block content %}
-                    <!-- Template content renders here -->
-                {% endblock %}
-
-            </div>
-
-            {# for help getting the footer placement correc #}
-            <div class="push"></div>
+            {% block content %}
+                {# page specific main content fills in here. #}
+            {% endblock %}
 
         </div>
 
-        <footer class="footer">
-            <div class="container text-center">
-                <p>
-                    <span id="copyright"></span> Richard Campen. v0.4.0
-                </p>
-                <p>
-                    <a href="{{ url_for('tos') }}">Terms of Service</a>
-                    and
-                    <a href="{{ url_for('privacy') }}">Privacy Policy.</a>
-                    This site uses cookies.
-                </p>
-                <script>
-                    var year = new Date().getFullYear();
-                    var timer = document.getElementById('copyright');
-                    copyrightText = "&#169; " + year;
-                    timer.innerHTML = copyrightText;
-                </script>
-            </div>
-        </footer>
+        {% include 'partials/footer.html' %}
 
         {# load js: TODO: move this down to bottom of body. don't know why it was up here in the first place. #}
         <script src="{{ static_chunk('main.js') }}"></script>

@@ -24,6 +24,8 @@ flask_apps:
     venv_dir: "{{ app_virtualenv }}"
     user: "{{ app_user_name }}"
     config:
+      - key: DEBUG
+        value: True
       - key: SECRET_KEY
         value: "'thisisasupersecretkey'"
       - key: SQLALCHEMY_DATABASE_URI
