@@ -52,6 +52,17 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        use: [{
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'static/fonts/',
+              publicPath: '../fonts/',
+            }
+        }]
+    },
     ],
   },
   plugins: [
@@ -62,7 +73,10 @@ module.exports = {
           return file;
         },
         filter: (file) => {
-          return !file.path.match(/\/img\//);  // don't add image files to the manifest
+          let include = true;
+          if (file.path.match(/\/img\//)) {include = false}
+          if (file.path.match(/\/fonts\//)) {include = false}
+          return include
         }
       }),
       new MiniCssExtractPlugin({

@@ -1,0 +1,21 @@
+<nav class="navbar">
+    <a class="navbar-brand" href="{{ url_for('index') }}">Link Shortener</a>
+    <div class="navbar-header pull-right">
+        {# don't want to show sign in button on sign in page #}
+        {% if request.endpoint != 'login' %}
+            {% if current_user.is_authenticated %}
+                <p class="navbar-btn" style="padding-right: 10px;">
+                    <a type="button" class="btn btn-default" href="{{ url_for('logout') }}">
+                        Log out
+                    </a>
+                </p>
+            {% else %}
+                <p class="navbar-btn">
+                    <a type="button" class="btn btn-success" href="{{ url_for('login') }}">
+                        Log in
+                    </a>
+                </p>
+            {% endif %}
+        {% endif %}
+    </div>
+</nav>
