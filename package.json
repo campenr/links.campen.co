@@ -1,0 +1,43 @@
+{
+  "name": "link-shortener",
+  "version": "0.4.0",
+  "description": "Create short links from full urls.",
+  "private": true,
+  "scripts": {
+    "watch": "ENVIRONMENT=development webpack --watch --info-verbosity verbose --config webpack/webpack.config.js",
+    "build": "webpack --config webpack/webpack.config.js",
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/campenr/links.campen.co.git"
+  },
+  "author": "Richard Campen <richard@campen.co>",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/campenr/richardcampendotcom/issues"
+  },
+  "homepage": "https://github.com/campenr/richardcampendotcom#readme",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "jquery": "3.4.1",
+    "popper.js": "^1.16.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.7.6",
+    "copy-webpack-plugin": "^5.1.1",
+    "css-loader": "^3.5.3",
+    "exports-loader": "^0.7.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.14.0",
+    "postcss-loader": "^3.0.0",
+    "purgecss": "^2.1.2",
+    "purgecss-webpack-plugin": "^2.1.2",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.2.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-livereload-plugin": "^2.3.0",
+    "webpack-manifest-plugin": "^2.2.0"
+  }
+}
