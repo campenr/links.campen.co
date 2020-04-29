@@ -20,6 +20,9 @@
   "homepage": "https://github.com/campenr/richardcampendotcom#readme",
   "dependencies": {
     "bootstrap": "^4.4.1",
+    "clipboard": "^2.0.6",
+    "datatables.net-bs4": "^1.10.20",
+    "font-awesome": "^4.7.0",
     "jquery": "3.4.1",
     "popper.js": "^1.16.1"
   },

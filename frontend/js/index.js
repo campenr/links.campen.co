@@ -1,3 +1,6 @@
+import 'bootstrap';
+require('datatables.net-bs4');
+
 $(document).ready(function(){
 
     // Instantiate data table contents from ajax call
