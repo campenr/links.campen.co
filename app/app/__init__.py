@@ -26,4 +26,4 @@ login_manager = LoginManager()
 login_manager.init_app(flask_app)
 login_manager.login_view = "login"
 
-from app import views, models, forms, api
+from app import views, models, forms, api, context_processors

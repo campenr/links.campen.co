@@ -1,0 +1,9 @@
+{% macro active_link(endpoint) %}
+    {% if request.endpoint.endswith(endpoint) %}active{% endif %}
+{% endmacro %}
+
+{% macro webpack_watch_livereload() %}
+    {% if config.DEBUG %}
+        <script src="http://localhost:35729/livereload.js"></script>
+    {% endif %}
+{% endmacro %}
