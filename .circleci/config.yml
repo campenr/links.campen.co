@@ -13,6 +13,16 @@ jobs:
       - run: ssh-keyscan vps1.campen.co >> ~/.ssh/known_hosts
       - checkout
       - run: git submodule sync && git submodule update --init
+      - run:
+          name: Build frontend
+          command: |
+            echo 'export NVM_DIR=$HOME/.nvm' >> $BASH_ENV
+            . $BASH_ENV
+            . $NVM_DIR/nvm.sh --no-use
+            nvm install
+            nvm use
+            npm install
+            npm run build
       - deploy:
           name: deploy
           command: |
