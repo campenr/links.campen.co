@@ -9,45 +9,10 @@
 
         <title>Link Shortener</title>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="{{ static_chunk('main.css') }}">
-
-        {# data tables styling #}
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.css"/>
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.css"/>
-
-        {# load js: TODO: move this down to bottom of body. don't know why it was up here in the first place. #}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.13/clipboard.min.js"></script>
-        <script src="{{ static_chunk('main.js') }}"></script>
-        <script src="{{ static_chunk('vendors~main.js') }}"></script>
-        {{ webpack_watch_livereload() }}
-
-        {# cookie notification popup #}
-        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
-        <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
-        <script>
-        window.addEventListener("load", function(){
-            window.cookieconsent.initialise({
-                "palette": {
-                    "popup": {
-                        "background": "#000"
-                    },
-                "button": {
-                    "background": "transparent",
-                    "text": "#f1d600",
-                    "border": "#f1d600"
-                    }
-                }
-            });
-        });
-        </script>
-
     </head>
 
     <body>
-
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header pull-left">
@@ -123,12 +88,10 @@
             </div>
         </footer>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-    {# datatables js #}
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.js"></script>
+        {# load js: TODO: move this down to bottom of body. don't know why it was up here in the first place. #}
+        <script src="{{ static_chunk('main.js') }}"></script>
+        <script src="{{ static_chunk('vendors~main.js') }}"></script>
+        {{ webpack_watch_livereload() }}
 
     </body>
 </html>
