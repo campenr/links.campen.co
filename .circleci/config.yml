@@ -21,8 +21,6 @@ jobs:
             . $NVM_DIR/nvm.sh --no-use
             nvm install
             nvm use
-            npm config set "@fortawesome:registry" https://npm.fontawesome.com/ && \
-            npm config set "//npm.fontawesome.com/:_authToken" $FONT_AWESOME_NPM_TOKEN
             npm install
             npm run build
       - deploy:
