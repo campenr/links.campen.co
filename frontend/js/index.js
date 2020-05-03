@@ -66,7 +66,7 @@ $(document).ready(function(){
                 // add copy button for this link
                 "targets": 3,
                 "render": function ( data, type, full, meta ) {
-                    return '<button class="btn btn-default copy-button" title="copy to clipboard" data-clipboard-text="' + location.protocol + '//' + location.host + '/' + data + '"><i class="fal fa-copy" aria-hidden="true"></i></button>'
+                    return '<button class="btn copy-button" title="copy to clipboard" data-clipboard-text="' + location.protocol + '//' + location.host + '/' + data + '"><i class="fal fa-copy" aria-hidden="true"></i></button>'
                 }
             },
             {

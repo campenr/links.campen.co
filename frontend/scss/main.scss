@@ -1,4 +1,7 @@
 @import "_custom";
 @import "~bootstrap/scss/bootstrap";
 
-@import '~@fortawesome/fontawesome-pro/css/light.css';
+$fa-font-path: "~@fortawesome/fontawesome-pro/webfonts";
+
+@import '~@fortawesome/fontawesome-pro/scss/fontawesome';
+@import '~@fortawesome/fontawesome-pro/scss/light';

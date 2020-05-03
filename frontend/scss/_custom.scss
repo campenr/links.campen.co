@@ -6,7 +6,7 @@ $spacers: (
 );
 
 $theme-colors: (
-    grey: #ccc,
+    grey: #ccc
 );
 
 $navbar-light-color: #f5f5f5;
@@ -30,6 +30,17 @@ $navbar-padding-x: 0.25rem;
 
 .text-medium {
     font-size: 0.9rem;
+}
+
+.btn-login {
+    color: black !important;
+    background-color: white !important;
+    border: rgba(0, 0, 0, 0.7) 1px solid !important;
+
+    &:hover, &:focus {
+        color: white !important;
+        background-color: rgba(0, 0, 0, 0.7) !important;
+    }
 }
 
 // override some jQuery.dataTables styling
@@ -78,9 +89,44 @@ $navbar-padding-x: 0.25rem;
     vertical-align: middle !important;
 }
 
+.table-header--sortable {
+    text-align: center;
+
+    &:hover, &:focus {
+        cursor: pointer;
+        border-top: black 1px solid;
+        border-bottom: black 1px solid;
+    }
+}
+
+.sorting:after,
+.sorting_asc:after,
+.sorting_desc:after {
+    margin-left: 15px;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 500;
+    color: grey;
+}
+.sorting:after {
+    content: "\f0dc";
+}
+.sorting_asc:after {
+    content: "\f0de";
+    color: black;
+}
+.sorting_desc:after {
+    content: "\f0dd";
+    color: black;
+}
+
 .debug {
     div, p, nav,
     ul,li,
+    tbody, thead, tr, td, th,
     button {
         border: orange solid 1px;
         background: rgba(orange, 0.1);
