@@ -22,14 +22,16 @@
 
         {% include 'partials/header.html' %}
 
-        <div class="container-fluid main-content">
+        <div class="main-content">
+            <div class="container-fluid py-4">
 
-            {% include 'partials/messages.html' %}
+                {% include 'partials/messages.html' %}
 
-            {% block content %}
-                {# page specific main content fills in here. #}
-            {% endblock %}
+                {% block content %}
+                    {# page specific main content fills in here. #}
+                {% endblock %}
 
+            </div>
         </div>
 
         {% include 'partials/footer.html' %}
