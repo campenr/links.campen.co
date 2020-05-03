@@ -89,9 +89,19 @@ $navbar-padding-x: 0.25rem;
     vertical-align: middle !important;
 }
 
-table.dataTable thead th.sorting:after,
-table.dataTable thead th.sorting_asc:after,
-table.dataTable thead th.sorting_desc:after {
+.table-header--sortable {
+    text-align: center;
+
+    &:hover, &:focus {
+        cursor: pointer;
+        border-top: black 1px solid;
+        border-bottom: black 1px solid;
+    }
+}
+
+.sorting:after,
+.sorting_asc:after,
+.sorting_desc:after {
     margin-left: 15px;
     font-style: normal;
     font-variant: normal;
@@ -101,16 +111,14 @@ table.dataTable thead th.sorting_desc:after {
     font-weight: 500;
     color: grey;
 }
-
-table.dataTable thead th.sorting:after {
+.sorting:after {
     content: "\f0dc";
 }
-
-table.dataTable thead th.sorting_asc:after {
+.sorting_asc:after {
     content: "\f0de";
     color: black;
 }
-table.dataTable thead th.sorting_desc:after {
+.sorting_desc:after {
     content: "\f0dd";
     color: black;
 }
