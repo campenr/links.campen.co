@@ -91,7 +91,14 @@ module.exports = {
       ]),
       new PurgecssPlugin({
         paths: glob.sync(`${path.join(__dirname, '..', 'app')}/**/*`,  { nodir: true }),
-        whitelist: ['col-sm-12', 'page-link', 'paginate_button', 'page-item', 'next', 'previous', 'disabled', 'active']
+        whitelist: [
+            'col-sm-12', 'col-md-5', 'col-md-7',
+            'dataTables_wrapper', 'dt-bootstrap4', 'no-footer',
+            'sorting', 'sorting_asc', 'sorting_desc', 'sorting_disabled',
+            'link-table-body', 'odd', 'even',
+            'dataTables_paginate', 'paging_simple_numbers',
+            'page-link', 'paginate_button', 'page-item', 'next', 'previous', 'disabled', 'active'
+        ]
       }),
       new LiveReloadPlugin({
         // because we're not using hashed file names when running webpack watch we need to check hashes here.
