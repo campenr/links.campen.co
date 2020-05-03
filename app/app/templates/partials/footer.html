@@ -1,14 +1,15 @@
 <footer class="footer">
-    <div class="container text-center">
-        <p>
-            <span id="copyright"></span> Richard Campen. v0.4.0
-        </p>
-        <p>
-            <a href="{{ url_for('tos') }}">Terms of Service</a>
-            and
-            <a href="{{ url_for('privacy') }}">Privacy Policy.</a>
-            This site uses cookies.
-        </p>
+    <div class="container-fluid text-center text-small bg-light">
+        <div class="py-3">
+            <p class="mb-1">
+                <span id="copyright"></span> Richard Campen. v0.4.0
+            </p>
+            <p class="mb-1">
+                <a href="{{ url_for('tos') }}">Terms of Service</a>
+                and
+                <a href="{{ url_for('privacy') }}">Privacy Policy.</a>
+            </p>
+        </div>
         <script>
             var year = new Date().getFullYear();
             var timer = document.getElementById('copyright');

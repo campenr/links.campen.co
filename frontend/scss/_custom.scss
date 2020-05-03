@@ -1,3 +1,19 @@
+$spacer: 1rem;
+$spacers: (
+    6: ($spacer * 4),
+    7: ($spacer * 5),
+    8: ($spacer * 6)
+);
+
+$theme-colors: (
+    grey: #ccc,
+);
+
+$navbar-light-color: #f5f5f5;
+
+$navbar-padding-y: 0.25rem;
+$navbar-padding-x: 0.25rem;
+
 .main-wrapper {
     display: flex;
     min-height: 100vh;
@@ -8,47 +24,33 @@
     flex: 1;
 }
 
-.footer {
-    padding-top: 1.5rem;
-    background-color: #f5f5f5;
+.text-small {
+    font-size: 0.8rem;
 }
 
-.footer-content {
-    text-align: center;
-    font-size: 8;
+.text-medium {
+    font-size: 0.9rem;
 }
 
-/* Lastly, apply responsive CSS fixes as necessary */
-/*
-@media (max-width: 767px) {
-    .footer {
-        margin-left: -20px;
-        margin-right: -20px;
-        padding-left: 20px;
-        padding-right: 20px;
+// override some jQuery.dataTables styling
+.table-responsive .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.table-responsive .row:last-child {
+    margin-top: 4rem;
+}
+
+.table-responsive .row:last-child {
+    margin-top: 4rem;
+}
+
+.table-responsive .btn {
+    &:hover, &:focus {
+        border: grey 1px solid;
+        background-color: white;
     }
-}
-*/
-/*******************************************/
-
-/*div*/.login-wrapper {
-    text-align: center;
-    display: table;
-    margin: 0 auto;
-}
-
-/*button*/.google-login-button {
-}
-
-/*span*/.google-logo {
-    padding-left: 8px;
-    padding-right: 24px;
-}
-
-/*span*/.google-login-text {
-    padding-right: 24px;
-    color: #000;
-    color: rgba(0, 0, 0, 0.54);
 }
 
 /*table*/.col-1 {
@@ -76,44 +78,11 @@
     vertical-align: middle !important;
 }
 
-/* overwrite default jquery.datatables sorting icons */
-
-table.dataTable thead th {
-    position: relative;
-    /*left: 12px;*/
-    background-image: none !important;
-}
-
-table.dataTable thead th.sorting::after,
-table.dataTable thead th.sorting_asc::after,
-table.dataTable thead th.sorting_desc::after {
-    //position: absolute;
-//    left: 80px;
-//    display: block;
-//    font-family: "FontAwesome 5 Pro";
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  font-family: "FontAwesome 5";
-
-}
-
-table.dataTable thead th.sorting::after {
-    content: "\f0dc";
-    color: dark-grey;
-    bottom: 9px;
-    font-size: 0.8em;
-    padding-top: 0.12em;
-}
-table.dataTable thead th.sorting_asc::after {
-    content: "\f0de";
-    bottom: 4px;
-    color: black;
-}
-table.dataTable thead th.sorting_desc::after {
-    content: "\f0dd";
-    bottom: 10px;
-    color: black;
+.debug {
+    div, p, nav,
+    ul,li,
+    button {
+        border: orange solid 1px;
+        background: rgba(orange, 0.1);
+    }
 }

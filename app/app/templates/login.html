@@ -1,49 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+    <div class="grid my-7">
+        <div class="row justify-content-center">
 
-            <br/>
-            <br/>
-            <br/>
+            <div>
+                <form action="" method="post" name="login">
+                    {{ form.hidden_tag() }}
+                    <div class="my-1">
+                        <label for="username" class="sr-only">Username</label>
+                        {{ form.username(class="form-control", placeholder="Username") }}
+                    </div>
+                    <div class="my-1">
+                        <label for="password" class="sr-only">Password</label>
+                        {{ form.password(class="form-control", placeholder="Password") }}
+                    </div>
+                    <button class="btn btn-primary btn-block mt-3 mb-1" type="submit">
+                        <span class="font-weight-bold text-medium">Sign in</span>
+                    </button>
+                </form>
 
-            <div class="login-wrapper">
+                <hr/>
 
-                <p>
-                    <form action="" method="post" name="login">
-                        {{ form.hidden_tag() }}
-
-                        <p>
-                            <label for="username" class="sr-only">Username</label>
-                            {{ form.username(class="form-control", placeholder="Username") }}
-
-                            <label for="password" class="sr-only">Password</label>
-                            {{ form.password(class="form-control", placeholder="Password") }}
-                        </p>
-
-                        <p>
-                            <button class="btn btn-primary btn-block" type="submit"><b>Sign in</b></button>
-                        </p>
-
-                    </form>
-                </p>
-
-                <br/>
-
-                {# temporarily disabled while trying to get working again with newer setup #}
-                <p>
-                    <a href="{{ url_for('google_login') }}" class="btn btn-default btn-block google-login-button">
-                        <span class="google-logo">
-                                <img src="static/img/logo_google.png" width="18px" height="18px">
-                            </span>
-                        <span class="google-login-text"><b>Sign in with Google</b></span>
+                <div>
+                    <a href="{{ url_for('google_login') }}" class="btn border-grey btn-block my-1">
+                    <span class="ml-n2 mr-2">
+                        <img src="static/img/logo_google.png" width="18px" height="18px">
+                    </span>
+                        <span class="font-weight-bold text-medium">Sign in with Google</span>
                     </a>
-                </p>
-
+                </div>
             </div>
-        </div>
 
+        </div>
     </div>
 
 {% endblock %}
