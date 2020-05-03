@@ -1,3 +1,5 @@
+import 'bootstrap/js/dist/util';
+import 'bootstrap/js/dist/alert';
 const Clipboard = require('clipboard');
 const $ = require('jquery');
 require('datatables.net-bs4');
