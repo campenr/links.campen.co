@@ -9,7 +9,7 @@
                 {% if request.endpoint != 'login' %}
                     {% if current_user.is_authenticated %}
                         <div>
-                            <a class="btn btn-outline-secondary btn-sm" href="{{ url_for('logout') }}">
+                            <a class="btn btn-login btn-sm" href="{{ url_for('logout') }}">
                                 Log out
                             </a>
                         </div>
