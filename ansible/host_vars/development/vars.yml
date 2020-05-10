@@ -19,7 +19,7 @@ postgres_dbs:
     user: "{{ app_user_name }}"
     password: password
 
-flask_apps:
+django_apps:
   - root_dir: "{{ app_root }}"
     venv_dir: "{{ app_virtualenv }}"
     user: "{{ app_user_name }}"

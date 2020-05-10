@@ -6,9 +6,9 @@
     - ubuntu
     - python
     - postgres
-    - flask
-    - uwsgi
-    - nginx
+#    - django
+#    - uwsgi
+#    - nginx
 
 - hosts: production
   remote_user: link-shortener
