@@ -22,3 +22,6 @@
 [submodule "ansible/host_vars/production"]
 	path = ansible/host_vars/production
 	url = git@github.com:campenr/ansible-host-links.campen.co.git
+[submodule "ansible/roles/django"]
+	path = ansible/roles/django
+	url = git@github.com:campenr/ansible-role-django.git

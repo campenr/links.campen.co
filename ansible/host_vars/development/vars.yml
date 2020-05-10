@@ -20,16 +20,18 @@ postgres_dbs:
     password: password
 
 django_apps:
-  - root_dir: "{{ app_root }}"
+  - root_dir: "{{ app_root }}app/"
     venv_dir: "{{ app_virtualenv }}"
+    settings_file: app.settings.development
     user: "{{ app_user_name }}"
+    databases:
+      - label: "'default'"
+        name: "'{{ app_name }}'"
+        user: "'{{ app_user_name }}'"
+        password: "'password'"
     config:
-      - key: DEBUG
-        value: True
       - key: SECRET_KEY
         value: "'thisisasupersecretkey'"
-      - key: SQLALCHEMY_DATABASE_URI
-        value: "'postgresql://{{ app_user_name }}:password@localhost:5432/{{ app_name }}'"
       - key: GOOGLE_OAUTH_CLIENT_ID
         value: "'647134572594-eo6f7hjkl2n6ke90g3dkjcnib868rr9r.apps.googleusercontent.com'"
       - key: GOOGLE_OAUTH_CLIENT_SECRET
@@ -39,10 +41,10 @@ uwsgi_emperor_mode: False
 uwsgi_apps:
   - name: "{{ app_name }}"
     user: "{{ app_user_name }}"
-    root_dir: "{{ app_root }}app"
+    root_dir: "{{ app_root }}app/"
     venv_dir: "{{ app_virtualenv }}"
-    wsgi_file: wsgi.py
-    callable: flask_app
+    wsgi_file: app/wsgi.py
+    callable: application
     socket_dir: "/var/uwsgi/{{ app_name }}/"
     log_dir: "{{ app_log_path }}uwsgi/"
     config_dir: "{{ app_config_path }}uwsgi/"
