@@ -7,6 +7,10 @@
 
 # node things
 node_modules/
+app/static/js/
+app/static/css/
+app/static/img/
+app/static/fonts/
 old_app/static/js/
 old_app/static/css/
 old_app/static/img/
