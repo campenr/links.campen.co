@@ -7,14 +7,8 @@
 
 # node things
 node_modules/
-app/static/js/
-app/static/css/
-app/static/img/
-app/static/fonts/
-old_app/static/js/
-old_app/static/css/
-old_app/static/img/
-old_app/static/fonts/
+app/static/
+old_app/static/
 webpack-manifest.json
 
 # secrets
@@ -31,3 +25,6 @@ __pycache__/
 
 # hide secret local settings
 local.py
+
+# other unwanted files
+*.sql
