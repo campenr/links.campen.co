@@ -7,6 +7,8 @@ app_virtualenv: "{{ app_root }}venv/"
 app_config_path: "{{ app_root }}config/"
 app_log_path: "{{ app_root }}logs/"
 
+ubuntu_additional_packages:
+  - grc
 ubuntu_host_name: "{{ app_name }}-dev"
 
 python_environments:
