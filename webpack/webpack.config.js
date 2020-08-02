@@ -83,12 +83,14 @@ module.exports = {
         filename: `static/css/${staticNameFormat}.css`,
         path: path.resolve(__dirname, '..', 'app'),
       }),
-      new CopyPlugin([
-        {
-          from: path.join(__dirname, '..', 'frontend', 'img'),
-          to: path.join(__dirname, '..', 'app', 'static', 'img')
-        },
-      ]),
+      new CopyPlugin({
+        'patterns': [
+          {
+            from: path.join(__dirname, '..', 'frontend', 'img'),
+            to: path.join(__dirname, '..', 'app', 'static', 'img')
+          },
+        ]
+      }),
       new PurgecssPlugin({
         paths: glob.sync(`${path.join(__dirname, '..', 'app')}/**/*`,  { nodir: true }),
         whitelist: [
