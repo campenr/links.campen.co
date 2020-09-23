@@ -19,10 +19,8 @@ jobs:
             echo 'export NVM_DIR=$HOME/.nvm' >> $BASH_ENV
             . $BASH_ENV
             . $NVM_DIR/nvm.sh --no-use
-            nvm install
-            nvm use
-            npm install
-            npm run build
+            nvm install && nvm use
+            npm install && npm run build
       - deploy:
           name: deploy
           command: |
