@@ -1,0 +1,51 @@
+{#{% from "macros.html" import webpack_watch_livereload with context %}#}
+{% load app_tags %}
+
+
+<!DOCTYPE html>
+<html lang="en-nz">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>Link Shortener</title>
+
+        <link rel="stylesheet" href="{% static_chunk 'main.css' %}">
+        <link rel="stylesheet" href="{% static_chunk 'vendors~main.css' %}">
+
+        {% block head %}
+            {# page specific head_content goes here. #}
+        {% endblock %}
+
+    </head>
+
+    <body class="main-wrapper">
+
+        {% include 'partials/header.html' %}
+
+        <div class="main-content">
+            {% block main_content %}
+
+                <div class="container-fluid py-4">
+
+{#                    {% include 'partials/messages.html' %}#}
+
+                    {% block content %}
+                        {# page specific main content fills in here. #}
+                    {% endblock %}
+
+                </div>
+
+            {% endblock %}
+        </div>
+
+{#        {% include 'partials/footer.html' %}#}
+
+        {# load js: TODO: move this down to bottom of body. don't know why it was up here in the first place. #}
+        <script src="{% static_chunk 'main.js' %}"></script>
+        <script src="{% static_chunk 'vendors~main.js' %}"></script>
+{#        {{ webpack_watch_livereload() }}#}
+
+    </body>
+</html>

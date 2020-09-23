@@ -1,0 +1,21 @@
+<header>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid d-flex align-content-center">
+            <div>
+                <a class="navbar-brand" href="{% url 'index' %}">Link Shortener</a>
+            </div>
+            <div class="ml-auto">
+                {# don't want to show sign in button on sign in page #}
+                {% if request.endpoint != 'login' %}
+                    {% if current_user.is_authenticated %}
+                        <div>
+{#                            <a class="btn btn-login btn-sm" href="{{ url('logout') }}">#}
+                                Log out
+{#                            </a>#}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+</header>

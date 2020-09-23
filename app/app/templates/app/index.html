@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{#    {% if current_user.is_authenticated %}#}
+{#        <div class="mt-4 mb-6 mx-3">#}
+{#            <form action="" method="post" name="shorten-link">#}
+{#                {{ link_form.hidden_tag() }}#}
+{#                <div class="input-group">#}
+{#                    {{ link_form.link(class="form-control", placeholder="Enter a link") }}#}
+{#                    <div class="input-group-append">#}
+{#                        <button type="submit" class="btn btn-primary">Shorten</button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </form>#}
+{#        </div>#}
+
+{#        {% if current_user.role == 'guest' %}#}
+{#            <div class="alert alert-warning alert-dismissible mb-5 mx-3" role="alert">#}
+{#                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>#}
+{#                <strong>Note:</strong> You are viewing this website in <strong>Guest Mode</strong> and will only be able to save#}
+{#                a maximum of <strong>10 links</strong> at a time. If you reach this number you will need to delete an existing#}
+{#                link before you can create a new one.#}
+{#            </div>#}
+{#        {% endif %}#}
+
+        <div class="pb-5">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover" id="link-table">
+                    <colgroup>
+                        <col class="col-1">
+                        <col class="col-2">
+                        <col class="col-3">
+                        <col class="col-4">
+                        <col class="col-5">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            {# bootstraps text-center is not inhereted by the table headers so need to add to each th #}
+                            <th class="table-header--sortable"><span>Long link</span></th>
+                            <th class="table-header--sortable"><span>Created</span></th>
+                            <th class="table-header--sortable"><span>Short link</span></th>
+                            <th>{# blank filler #}</th>
+                            <th>{# blank filler #}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="link-table-body">
+                        {# TODO: table rows created with js from ajax data. #}
+                        {% for link in links %}
+                            <tr>
+                                {{ link }}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+{#    {% endif %}#}
+
+{% endblock %}
