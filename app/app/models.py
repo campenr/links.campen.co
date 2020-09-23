@@ -1,3 +1,6 @@
+import random
+
+import string
 from django.contrib.auth import get_user_model
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
@@ -118,3 +121,49 @@ class Link(models.Model):
         on_delete=models.CASCADE,
         help_text=_('The owner of this link.'),
     )
+
+    def save(self, *args, **kwargs):
+        # TODO: add guest limit of 10 links logic.
+        self.url = self.format_link_url(self.url)  # TODO: switch to using URL field
+        self.name = self.format_link_name(self.url)
+        self.token = self.make_link_token()
+        super().save(*args, **kwargs)
+
+    @staticmethod
+    def format_link_url(url):
+        """Format submitted long link URL."""
+
+        # TODO figure out a better way to do this?
+        # TODO Using // no good if served behind https but target url doesn't support it.
+        if not ('https://' in url or 'http://' in url or '//' in url):
+            url = 'http://' + url
+
+        return url
+
+    @staticmethod
+    def make_link_token():
+        """Create a new unique link token."""
+
+        while True:
+            token = ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits)
+                                 for _ in range(6))
+            if Link.objects.filter(token=token).first() is None:
+                return token
+
+    @staticmethod
+    def format_link_name(link):
+        """Format the name of the long link for cleaner output."""
+
+        common_names = {'youtube.com/watch?': 'youtube.com',
+                        'google.com/search?': 'google.com/search'}
+
+        # TODO regex instead for a more robust string matching?
+        for key, value in common_names.items():
+            if key in link:
+                link = value
+
+        # TODO dont truncate stored name, let the client decide how to truncate names instead.
+        if len(link) > 35:
+            link = link[:35] + ' ...'
+
+        return link
