@@ -14,6 +14,9 @@
         <link rel="stylesheet" href="{% static_chunk 'main.css' %}">
         <link rel="stylesheet" href="{% static_chunk 'vendors~main.css' %}">
 
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+         <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
         {% block head %}
             {# page specific head_content goes here. #}
         {% endblock %}
@@ -23,6 +26,8 @@
     <body class="main-wrapper">
 
         {% include 'partials/header.html' %}
+
+        <div class="slant"></div>
 
         <div class="main-content">
             {% block main_content %}
@@ -45,7 +50,6 @@
         {# load js: TODO: move this down to bottom of body. don't know why it was up here in the first place. #}
         <script src="{% static_chunk 'main.js' %}"></script>
         <script src="{% static_chunk 'vendors~main.js' %}"></script>
-{#        {{ webpack_watch_livereload() }}#}
 
     </body>
 </html>

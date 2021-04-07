@@ -1,7 +1,48 @@
-@import "_custom";
-@import "~bootstrap/scss/bootstrap";
+@tailwind base;
+@tailwind utilities;
 
-$fa-font-path: "~@fortawesome/fontawesome-pro/webfonts";
 
-@import '~@fortawesome/fontawesome-pro/scss/fontawesome';
-@import '~@fortawesome/fontawesome-pro/scss/light';
+@layer base {
+
+    input[type=text] {
+        @apply border;
+        @apply border-black;
+        @apply border-opacity-20;
+        @apply rounded;
+        @apply h-9;
+        @apply px-3;
+    }
+
+    label {
+        @apply uppercase;
+        @apply font-bold;
+        @apply opacity-80;
+        @apply text-sm;
+    }
+}
+
+// todo: get this slant slanted.
+.slant {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    height: 250px;
+    width: 100%;
+    @apply bg-purple;
+}
+
+.button {
+    @apply font-bold;
+    @apply text-center;
+    @apply block;
+    @apply border;
+    @apply py-3;
+    @apply rounded-full;
+}
+
+.button-green {
+    @apply bg-green;
+    @apply border-green;
+    @apply text-white;
+}

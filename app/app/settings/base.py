@@ -55,7 +55,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'app.wsgi.application'
 
-AUTH_USER_MODEL = 'app.User'
+# AUTH_USER_MODEL = 'app.User'
 
 # Password validation
 

@@ -1,9 +1,6 @@
-from django.views.generic import ListView
-
-from app.models import Link
+from django.views.generic import TemplateView
 
 
-class Index(ListView):
-    model = Link
+class IndexView(TemplateView):
+
     template_name = 'app/index.html'
-    context_object_name = 'links'
