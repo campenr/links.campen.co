@@ -6,6 +6,7 @@ module.exports = {
     },
     colors: {
       'white': '#fff',
+      'grey': '#cccccc',
       'black': '#000',
       'purple': '#6366F1',
       'green': '#10B981',
@@ -17,7 +18,7 @@ module.exports = {
     }
   },
   purge: {
-    enabled: false,
+    enabled: true,
     content: ['./app/app/**/*.html'],
   },
 }

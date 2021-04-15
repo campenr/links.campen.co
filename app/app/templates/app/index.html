@@ -2,32 +2,48 @@
 
 {% block content %}
 
-    <div class="mt-28 mb-20">
-        <p class="text-white text-center text-4xl">Sign in to start shortening URLs</p>
-    </div>
+    <div class="py-16 px-8">
 
-    <div class="flex justify-center">
-        <div class="py-16 px-20 bg-white shadow-lg rounded">
+        <div class="border border-grey rounded bg-white shadow-md">
 
-            <div class="pb-5 border-b-2 border-black border-opacity-20">
-                <form>
-                    <div class="flex flex-col">
-
-                        <label for="username" class="mb-2">Username</label>
-                        <input id="username" class="mb-3 w-64" type="text">
-                        <label for="password" class="mb-2">Password</label>
-                        <input id="password" class="mb-5 w-64" type="text">
-                        <button class="button button-green font-base" type="submit">Sign in</button>
-
-                    </div>
-                </form>
-            </div>
-
-            <div class="mt-5">
-                <a class="button font-base">Sign in with google</a>
-            </div>
+            <form>
+                <div class="flex items-center pl-12 pr-6">
+                    <label for="short-url" class="text-2xl font-normal tracking-tight mr-6 opacity-80">URL:</label>
+                    <input id="short-url" class="flex-grow mr-4 my-6" type="text" placeholder="https://">
+                    <button class="button button-green font-base px-8 py-2" type="submit">
+                        <span>Shorten</span>
+                    </button>
+                </div>
+            </form>
 
         </div>
+
+        <div class="mt-24 mb-20">
+            <p class="text-white text-center text-4xl">Your shortened links will appear here</p>
+        </div>
+
+    </div>
+
+    <div class="py-16 px-8">
+
+        <div class="border border-grey rounded bg-white shadow-md">
+            <div class="flex justify-between pl-12 pr-6">
+
+                <div>
+                    That cool document
+                </div>
+
+                <div>
+                    l.campen.co/Be4df88a
+                </div>
+
+                <div>
+                    <button class="button">X</button>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 
 {% endblock %}

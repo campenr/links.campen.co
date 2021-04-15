@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="mt-24 mb-20">
+        <p class="text-white text-center text-4xl">Sign in to start shortening URLs</p>
+    </div>
+
+    <div class="flex justify-center">
+        <div class="py-16 px-20 bg-white shadow-lg rounded">
+
+            <div class="pb-5 border-b-2 border-black border-opacity-20">
+                <form>
+                    <div class="flex flex-col">
+
+                        <label for="username" class="mb-2">Username</label>
+                        <input id="username" class="mb-3 w-64" type="text">
+                        <label for="password" class="mb-2">Password</label>
+                        <input id="password" class="mb-5 w-64" type="text">
+                        <button class="button button-green font-base" type="submit">
+                            <span>Sign in</span>
+                        </button>
+
+                    </div>
+                </form>
+            </div>
+
+            <div class="mt-5">
+                <a class="button">
+                    <span class="font-base opacity-90">Sign in with google</span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
