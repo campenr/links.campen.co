@@ -27,10 +27,12 @@
 
         {% include 'partials/header.html' %}
 
-        <div class="slant-wrapper">
-            <div class="slant"></div>
+        <div style="position: fixed; top: 0; left: 0; width: 100%; z-index: -1;">
+            <div class="slant-wrapper">
+                <div class="slant"></div>
+            </div>
+            <div class="slant-padding"></div>
         </div>
-        <div class="slant-padding"></div>
 
         <div class="main-content">
             {% block main_content %}

@@ -33,9 +33,10 @@
     top: 0;
     left: 0;
     z-index: -1;
-    height: 60vh;
+    height: 70vh;
     width: 100%;
-    @apply bg-purple;
+    //@apply bg-indigo-500;
+    background: linear-gradient(85.55deg, #6366F1 -0.8%, rgba(99, 102, 241, 0.7) 184.12%);
     clip-path: polygon(0 0, 0 100%, 100% calc(100% - 7vw), 100% 0);
 }
 
@@ -47,12 +48,17 @@
     @apply font-bold;
     @apply text-center;
     @apply block;
-    @apply border;
     @apply rounded-full;
 }
 
+.circle-button {
+    @apply rounded-full;
+    @apply h-12;
+    @apply w-12;
+}
+
 .button-green {
-    @apply bg-green;
-    @apply border-green;
+    @apply bg-green-500;
+    @apply border-green-500;
     @apply text-white;
 }
