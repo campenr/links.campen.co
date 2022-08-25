@@ -84,11 +84,6 @@ module.exports = {
         useSourceHash: true,
       }),
   ],
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
-  },
   watchOptions: {
     ignored: /node_modules/,
   },

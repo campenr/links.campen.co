@@ -1,5 +1,7 @@
 import os
 
+ENVIRONMENT = os.getenv('DJANGO_ENV', 'development')
+
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
@@ -13,6 +15,7 @@ ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS")
 
 INSTALLED_APPS = [
     'app',
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -23,6 +26,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -87,8 +91,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
+# allow serving static files without needing the collectstatic command in dev.
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static') if ENVIRONMENT == 'development' else os.path.join(BASE_DIR, 'static')
 
 # Databases
 
