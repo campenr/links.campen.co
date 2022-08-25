@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.synced_folder "app/", "/home/vagrant/app/", create: true
 
-  config.vm.network "private_network", ip: "192.168.50.111"
+  config.vm.network "private_network", ip: "192.168.56.111"
 
   config.vm.network "forwarded_port", guest: 80, host: 5011
 
