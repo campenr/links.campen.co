@@ -27,6 +27,14 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        loader: 'esbuild-loader',
+        options: {
+          loader: 'jsx',
+          target: 'es2015'
+        }
+      },
+      {
         test: /\.(scss|css)$/,
         use: [
           MiniCssExtractPlugin.loader,
@@ -84,11 +92,6 @@ module.exports = {
         useSourceHash: true,
       }),
   ],
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
-  },
   watchOptions: {
     ignored: /node_modules/,
   },
