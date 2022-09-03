@@ -7,10 +7,12 @@
 
 # node things
 node_modules/
+webpack-manifest.json
+
+# compiled frontend
 app/static/
 app_old/static/
 old_app/static/
-webpack-manifest.json
 
 # secrets
 ansible/vault_passwords/*
