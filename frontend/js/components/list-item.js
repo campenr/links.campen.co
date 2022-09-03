@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 
-const ListItem = () => {
+const ListItem = ({ link }) => {
     const [expanded, setExpanded] = useState(false);
 
+    const url = `${ window.location.host }/${ link.token }`
 
     return (
         <div className="mb-6 px-8">
@@ -11,11 +12,11 @@ const ListItem = () => {
                 <div className="flex justify-between items-center pl-12 pr-6 py-4">
 
                     <div className="text-2xl font-normal tracking-tight opacity-80">
-                        That cool document
+                        { link.name }
                     </div>
 
                     <div className="text-2xl font-normal tracking-tight opacity-80">
-                        <a href="#">l.campen.co/Be4df88a</a>
+                        <a href={ url }>{ url }</a>
                     </div>
 
                     <div className="flex items-center">

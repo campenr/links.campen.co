@@ -1,9 +1,30 @@
 import React from 'react';
 import {render} from 'react-dom';
 import ListItem from "./components/list-item";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
+const queryClient = new QueryClient()
 
 
-const App = () => {
+const getLinks = () => {
+    return fetch('http://localhost:5011/api/v1.0/links/')
+        .then((response) => response.json())
+}
+
+
+const Main = () => {
+
+    const query = useQuery(['links'], getLinks)
+
+    window.data = query.data;
+
     return (
         <div>
             <div>
@@ -29,8 +50,21 @@ const App = () => {
 
                 </div>
             </div>
-            <ListItem />
+            {query.data?.map(link => (
+              <ListItem link={ link }/>
+            ))}
         </div>
+    )
+}
+
+
+const App = () => {
+    return (
+        <QueryClientProvider client={queryClient}>
+            <Main />
+            {/* the devtool doesn't render... why not? */}
+            <ReactQueryDevtools initialIsOpen={true} position='top-right' />
+        </QueryClientProvider>
     )
 }
 
